@@ -1,15 +1,21 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-const NavBar = () => {
+import SideDrawer from './SideDrawer/SideDrawer';
+import TopBar from './TopBar/TopBar';
+
+const NavBar = (): JSX.Element => {
+  const [navStatus, setNavStatus] = useState(false);
+
+  const handleMenu = (): void => {
+    setNavStatus(prev => !prev);
+  }
+
   return (
-    <div>
-      <ul>
-        <Link to='/'><li>Home</li></Link>
-        <Link to='/backlog'><li>Backlog</li></Link>
-        <Link to='/login'><li>Login</li></Link>
-      </ul>
-    </div>
+    <nav>
+      <TopBar handleMenu={handleMenu} />
+      {navStatus && <SideDrawer handleMenu={handleMenu} />}
+    </nav>
   )
 }
 

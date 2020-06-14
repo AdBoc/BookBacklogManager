@@ -6,9 +6,9 @@ import MainPage from './components/MainPage/MainPage';
 import NavBar from './components/NavBar/NavBar';
 import Backlog from './components/Backlog/Backlog';
 
-import './App.css';
+import './styles/scss/index.scss';
 
-const App: React.FC = () => {
+const App: React.FC = (): JSX.Element => {
   return (
     <Router history={history}>
       <NavBar />
