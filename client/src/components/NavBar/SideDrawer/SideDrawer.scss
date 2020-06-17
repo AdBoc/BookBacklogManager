@@ -1,9 +1,28 @@
 .SideDrawer {
   height: 100vh;
-  width: 85vw;
+  width: 100vw;
   background: rgba(155, 154, 154, 0.9);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
+  text-align: center;
+
+  &__Links {
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+
+    &--link {
+      font-size: 1.5rem;
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      padding: 1rem;
+    }
+  }
+}
+
+.link {
+  text-decoration: none;
 }

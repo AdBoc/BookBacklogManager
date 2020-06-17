@@ -4,7 +4,7 @@ const AddNewBacklog = () => {
   return (
     <div>
       AddNewBacklog
-      <label> Pick language of your song:
+      <label>Backlog type
         <select className="home__form__select" name="language">
           <option value="books">Books</option>
           <option value="movies">Movies</option>

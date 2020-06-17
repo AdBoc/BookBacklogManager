@@ -1,0 +1,29 @@
+.BookList {
+  background-color: rgb(216, 216, 216);
+  padding: 1rem;
+  &__title {
+    font-size: 1.25rem;
+    margin: 0 0 1rem 0;
+  }
+  //   &__label {
+  //   }
+  //   &__sortBy {
+  //   }
+  &__list {
+    margin: 1rem 0;
+    &__item {
+      list-style-type: none;
+      margin: 1rem;
+      padding: 1rem;
+      border: 1px solid black;
+    }
+  }
+  //   &__button {
+  //   }
+  //   &__form {
+  //     &__input {
+  //     }
+  //     &__submit {
+  //     }
+  //   }
+}

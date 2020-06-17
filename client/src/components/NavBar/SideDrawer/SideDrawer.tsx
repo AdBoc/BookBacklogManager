@@ -10,10 +10,11 @@ const SideDrawer: React.FC<Props> = ({ handleMenu }): JSX.Element => {
 
   return (
     <div className="SideDrawer" onClick={handleMenu}>
-      <ul>
-        <Link to='/'><li>Home</li></Link>
-        <Link to='/backlog'><li>Backlog</li></Link>
-        <Link to='/login'><li>Login</li></Link>
+      <ul className="SideDrawer__Links">
+        <Link className="link" to='/'><li className="SideDrawer__Links--link">Home</li></Link>
+        <Link className="link" to='/backlog'><li className="SideDrawer__Links--link">Backlog</li></Link>
+        <Link className="link" to='/login'><li className="SideDrawer__Links--link">Login</li></Link>
+        <Link className="link" to='/currentReads'><li className="SideDrawer__Links--link">Current Reads</li></Link>
       </ul>
     </div>
   )
