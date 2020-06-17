@@ -7,6 +7,7 @@ const MainPage: React.FC = (): JSX.Element => {
         <>
             <div>Make your own backlog lists from different categories</div>
             <Link to='/backlog'>Go to BacklogManager</Link>
+            <Link to='/currentReads'>View Current Reads</Link>
         </>
     )
 }

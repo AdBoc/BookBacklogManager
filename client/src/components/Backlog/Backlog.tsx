@@ -12,7 +12,6 @@ const Backlog = () => {
 
   return (
     <div className="Backlog">
-      <h1 className="Backlog__title" >Manage Backlog</h1>
       {/* <button onClick={addBacklog}>Add new backlog</button> */}
       {/* {newBacklog && <AddNewBacklog />} */}
       <BooksList />

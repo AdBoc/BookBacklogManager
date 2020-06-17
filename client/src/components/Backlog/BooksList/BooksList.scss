@@ -12,10 +12,18 @@
   &__list {
     margin: 1rem 0;
     &__item {
-      list-style-type: none;
       margin: 1rem;
       padding: 1rem;
       border: 1px solid black;
+    }
+    &__details {
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      position: fixed;
+      background-color: rgb(216, 216, 216);
     }
   }
   //   &__button {

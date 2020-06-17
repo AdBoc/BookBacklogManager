@@ -9,6 +9,30 @@ interface BookStateObject {
   type: string;
 }
 
+const INITIALARRAY = [
+  {
+    title: 'Zbrodnia i Kara',
+    author: 'Fidor Dostojewski',
+    year: '1866',
+    pages: '504',
+    type: 'fiction'
+  },
+  {
+    title: 'aa',
+    author: 'bb',
+    year: 'cc',
+    pages: 'dd',
+    type: 'ee'
+  },
+  {
+    title: 'aa',
+    author: 'bb',
+    year: 'cc',
+    pages: 'dd',
+    type: 'ee'
+  }
+]
+
 const BooksList = (): JSX.Element => {
 
   const initialBookState = {
@@ -19,33 +43,10 @@ const BooksList = (): JSX.Element => {
     type: ''
   }
 
-  const INITIALARRAY = [
-    {
-      title: 'Zbrodnia i Kara',
-      author: 'Fidor Dostojewski',
-      year: '1866',
-      pages: '504',
-      type: 'fiction'
-    },
-    {
-      title: 'aa',
-      author: 'bb',
-      year: 'cc',
-      pages: 'dd',
-      type: 'ee'
-    },
-    {
-      title: 'aa',
-      author: 'bb',
-      year: 'cc',
-      pages: 'dd',
-      type: 'ee'
-    }
-  ]
-
   const [addBook, setAddBook] = useState(false);
   const [newBook, setNewBook] = useState<BookStateObject>(initialBookState);
   const [bookArray, setBookArray] = useState<any>(INITIALARRAY);
+  const [id, setId] = useState<any>(undefined);
 
   const addNewBook = () => {
     setAddBook(prev => !prev);
@@ -61,6 +62,15 @@ const BooksList = (): JSX.Element => {
     e.preventDefault();
     setBookArray([...bookArray, newBook]);
     setNewBook(initialBookState);
+  }
+
+  const handleElement = (e) => {
+    console.log(e.target.id);
+    +(id) === +(e.target.id) ? setId(undefined) : setId(+(e.target.id));
+  }
+
+  const edit = () => {
+    console.log('edit');
   }
 
   return (
@@ -91,25 +101,29 @@ const BooksList = (): JSX.Element => {
           <option value="Science">Science</option>
         </select>
       </label>
+      <div>Total amount of books:</div>
       <div className="BookList__list">
-        {bookArray.map((item, index) => {
+        {bookArray.length ? bookArray.map((item, index) => {
           return (
-            <div className="BookList__list__item" key={index}>
-              <li>
-                {item.title},
-                {item.author},
-                {item.year},
-                {item.pages},
-                {item.type}
-              </li>
-              <div>download</div>
-              <div>edit</div>
-              <div>remove</div>
-              <div>upload</div>
+            <div key={index}>
+              <ul className="BookList__list__item" id={index} onClick={handleElement}>
+                <li id={index}>{item.title}</li>
+                <li id={index}>{item.author}</li>
+              </ul>
+              {index === id ? (
+                <div className="BookList__list__details" onClick={handleElement} id={index}>
+                  <div id={index} onClick={handleElement}>{item.title}, {item.author}, release year: {item.year}, pages: {item.pages}, type: {item.type}</div>
+                  <button>download</button>
+                  <button onClick={edit}>edit</button>
+                  <button>remove</button>
+                  <button>upload</button>
+                  <button>set Status</button>
+                </div>
+              ) : null}
             </div>
           )
         }
-        )}
+        ) : (<div>Empty</div>)}
       </div>
       <button className="BookList__button" onClick={addNewBook}>Add new book</button>
       {addBook &&
@@ -126,83 +140,7 @@ const BooksList = (): JSX.Element => {
   )
 }
 export default BooksList;
-//status currently hidden, currently readed
-//: React.ChangeEvent<HTMLInputElement> React.FormEvent<HTMLFormElement>
-
-
-
-
-
-
-
-
-
-// import React, { useState } from 'react';
-
-// interface BookStateObject {
-//   title: string;
-//   author: string;
-//   year: string;
-//   pages: string;
-//   type: string;
-// }
-
-// const BooksList = (): JSX.Element => {
-
-//   const initialBookState = {
-//     title: '',
-//     author: '',
-//     year: '',
-//     pages: '',
-//     type: ''
-//   }
-
-//   const [addBook, setAddBook] = useState(false);
-//   const [newBook, setNewBook] = useState<BookStateObject>(initialBookState);
-//   const [bookArray, setBookArray] = useState<BookStateObject[] | []>([]);
-
-//   const addNewBook = () => {
-//     setAddBook(prev => !prev);
-//   }
-
-//   const handleChange = (e) => { //: React.ChangeEvent<HTMLInputElement> React.FormEvent<HTMLFormElement>
-//     e.preventDefault();
-//     const { name, value } = e.target;
-//     setNewBook(prev => ({ ...prev, [name]: value }));
-//   }
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setBookArray([...bookArray, newBook]);
-//     setNewBook(initialBookState);
-//   }
-
-//   const myArr = ['a', 'b', 'c'];
-
-//   return (
-//     <div>
-//       <div className="BookList">BooksList</div>
-//       <div>Sort List By /author /title /length /year</div>
-//       <button onClick={addNewBook}>Add new book</button>
-//       {addBook &&
-//         <form onSubmit={handleSubmit}>
-//           <input type="text" name="title" value={newBook.title} placeholder="title" onChange={handleChange} required />
-//           <input type="text" name="author" value={newBook.author} placeholder="author" onChange={handleChange} required />
-//           <input type="text" name="year" value={newBook.year} placeholder="year" onChange={handleChange} required />
-//           <input type="text" name="pages" value={newBook.pages} placeholder="pages" onChange={handleChange} required />
-//           <input type="text" name="type" value={newBook.type} placeholder="type" onChange={handleChange} required />
-//           <input type="submit" value="Submit" />
-//         </form>
-//       }
-//       <div>
-//         {bookArray.map((item: BookStateObject[]) => console.log(item))}
-//       </div>
-//     </div>
-//   )
-// }
-// // {bookArray.map((item. index) => (<li key={index}>{item}</li>))}
-// //<li>{item}</li>
-// export default BooksList;
-
-// //type fiction nonfiction
-// //download book upload book
+//if in history then you can reread
+// download edit remove upload
+//index jest liczba, a id jest string, uzywam + do konwersji 
+// jak id undefined to CHUJ, jak index liczba to gites majonez
