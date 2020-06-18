@@ -1,109 +1,48 @@
 import React, { useState } from 'react';
-import './BooksList.scss'
-
-interface BookStateObject {
-  title: string;
-  author: string;
-  year: string;
-  pages: string;
-  type: string;
-}
-
-const INITIALARRAY = [
-  {
-    title: 'Zbrodnia i Kara',
-    author: 'Fidor Dostojewski',
-    year: '1866',
-    pages: '504',
-    type: 'fiction'
-  },
-  {
-    title: 'aa',
-    author: 'bb',
-    year: 'cc',
-    pages: 'dd',
-    type: 'ee'
-  },
-  {
-    title: 'aa',
-    author: 'bb',
-    year: 'cc',
-    pages: 'dd',
-    type: 'ee'
-  }
-]
+import './BooksList.scss';
+import { sortByTitle, sortByAuthor, sortByYear, sortByPages } from '../../../_helpers/sorting';
+import { initialArray } from '../../../_helpers/dummyData';
+import { BookStateObject } from '../../../ts/interfaces/interfaces';
+import Select from '../../ReusableComponents/Select';
+import { initialBookState, sortSelect, statusSelect, typeSelect } from './initialValues';
 
 const BooksList = (): JSX.Element => {
-
-  const initialBookState = {
-    title: '',
-    author: '',
-    year: '',
-    pages: '',
-    type: ''
-  }
-
   const [addBook, setAddBook] = useState(false);
   const [newBook, setNewBook] = useState<BookStateObject>(initialBookState);
-  const [bookArray, setBookArray] = useState<any>(INITIALARRAY);
+  const [bookArray, setBookArray] = useState<any>(initialArray);
   const [id, setId] = useState<any>(undefined);
-
-  const addNewBook = () => {
-    setAddBook(prev => !prev);
-  }
+  const [sort, setSortBy] = useState<any>('Title');
+  const [status, setStatus] = useState<any>('All');
+  const [type, setType] = useState<any>('All');
 
   const handleChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
     setNewBook(prev => ({ ...prev, [name]: value }));
   }
 
-  const handleSubmit = (e) => {
+  const submitNewBook = (e) => {
     e.preventDefault();
-    setBookArray([...bookArray, newBook]);
+    let date = new Date().toISOString();
+    let currentBook = newBook;
+    currentBook.status = 'On Backlog';
+    currentBook.dateCreated = date;
+    setBookArray([...bookArray, currentBook]);
     setNewBook(initialBookState);
   }
 
   const handleElement = (e) => {
-    console.log(e.target.id);
     +(id) === +(e.target.id) ? setId(undefined) : setId(+(e.target.id));
-  }
-
-  const edit = () => {
-    console.log('edit');
   }
 
   return (
     <div className="BookList">
-      <div className="BookList__title">BooksList</div>
-      <label className="BookList__label">Sort By:
-        <select className="BookList__sortBy">
-          <option value="Author">Author</option>
-          <option value="Title">Title</option>
-          <option value="Length">Length</option>
-          <option value="Year">Year</option>
-          <option value="Newly Added">Newly Added</option>
-        </select>
-      </label>
-      <label className="BookList__label">Status:
-        <select className="BookList__sortBy">
-          <option value="All">All</option>
-          <option value="Currently Reading">Currently Reading</option>
-          <option value="Suspended">Suspended</option>
-          <option value="History">History</option>
-        </select>
-      </label>
-      <label className="BookList__label">Type:
-        <select className="BookList__sortBy">
-          <option value="All">All</option>
-          <option value="NonFiction">NonFiction</option>
-          <option value="Fiction">Fiction</option>
-          <option value="Science">Science</option>
-        </select>
-      </label>
-      <div>Total amount of books:</div>
+      <p className="BookList__title">BooksList</p>
+      <Select name="sort by" options={sortSelect} setValue={setSortBy} />
+      <Select name="status" options={statusSelect} setValue={setStatus} />
+      <Select name="type" options={typeSelect} setValue={setType} />
+      <p>Total amount of books:</p>
       <div className="BookList__list">
-        {bookArray.length ? bookArray.map((item, index) => {
+        {bookArray.length ? bookArray.sort(sortByTitle()).map((item, index) => {
           return (
             <div key={index}>
               <ul className="BookList__list__item" id={index} onClick={handleElement}>
@@ -114,7 +53,7 @@ const BooksList = (): JSX.Element => {
                 <div className="BookList__list__details" onClick={handleElement} id={index}>
                   <div id={index} onClick={handleElement}>{item.title}, {item.author}, release year: {item.year}, pages: {item.pages}, type: {item.type}</div>
                   <button>download</button>
-                  <button onClick={edit}>edit</button>
+                  <button>edit</button>
                   <button>remove</button>
                   <button>upload</button>
                   <button>set Status</button>
@@ -125,9 +64,9 @@ const BooksList = (): JSX.Element => {
         }
         ) : (<div>Empty</div>)}
       </div>
-      <button className="BookList__button" onClick={addNewBook}>Add new book</button>
+      <button className="BookList__button" onClick={() => { setAddBook(prev => !prev) }}>Add new book</button>
       {addBook &&
-        <form className="BookList__form" onSubmit={handleSubmit}>
+        <form className="BookList__form" onSubmit={submitNewBook}>
           <input className="BookList__form__input" type="text" name="title" value={newBook.title} placeholder="title" onChange={handleChange} required />
           <input className="BookList__form__input" type="text" name="author" value={newBook.author} placeholder="author" onChange={handleChange} required />
           <input className="BookList__form__input" type="text" name="year" value={newBook.year} placeholder="year" onChange={handleChange} required />
@@ -139,8 +78,6 @@ const BooksList = (): JSX.Element => {
     </div>
   )
 }
+
 export default BooksList;
 //if in history then you can reread
-// download edit remove upload
-//index jest liczba, a id jest string, uzywam + do konwersji 
-// jak id undefined to CHUJ, jak index liczba to gites majonez
