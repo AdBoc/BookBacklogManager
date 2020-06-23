@@ -1,8 +1,15 @@
 import React from 'react';
+import { BookListFilters } from "../../ts/interfaces/interfaces";
 
-const Select = ({ options, setValue, name }) => {
+interface IProps {
+  options: BookListFilters;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  name: string;
+}
 
-  const handleChange = (e) => {
+const Select: React.FC<IProps> = ({ options, setValue, name }) => {
+
+  const handleChange = (e: any) => {
     setValue(e.target.value);
   }
 

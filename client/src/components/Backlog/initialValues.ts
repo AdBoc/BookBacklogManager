@@ -1,3 +1,5 @@
+import { BookListFilters } from "../../ts/interfaces/interfaces";
+
 export const initialBookState = {
   title: "",
   author: "",
@@ -8,15 +10,15 @@ export const initialBookState = {
   dateCreated: "",
 };
 
-export const sortSelect = [
-  { value: "Title", label: "Title" },
-  { value: "Author", label: "Author" },
-  { value: "Pages", label: "Pages" },
-  { value: "Year", label: "Year" },
-  { value: "New", label: "New" },
+export const sortSelect: BookListFilters = [
+  { value: "title", label: "Title" },
+  { value: "author", label: "Author" },
+  { value: "pages", label: "Pages" },
+  { value: "year", label: "Year" },
+  { value: "new", label: "New" },
 ];
 
-export const statusSelect = [
+export const statusSelect: BookListFilters = [
   { value: "All", label: "All" },
   { value: "On Backlog", label: "On Backlog" },
   { value: "Currently Reading", label: "Currently Reading" },
@@ -24,7 +26,7 @@ export const statusSelect = [
   { value: "History", label: "History" },
 ];
 
-export const typeSelect = [
+export const typeSelect: BookListFilters = [
   { value: "All", label: "All" },
   { value: "NonFiction", label: "NonFiction" },
   { value: "Fiction", label: "Fiction" },

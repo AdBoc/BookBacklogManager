@@ -11,3 +11,10 @@ export interface BookStateObject {
   status: string;
   dateCreated: string;
 }
+
+interface BookListsFilterObject {
+  value: string;
+  label: string;
+}
+
+export interface BookListFilters extends Array<BookListsFilterObject> {}

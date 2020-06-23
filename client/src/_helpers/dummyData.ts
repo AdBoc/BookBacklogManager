@@ -10,9 +10,9 @@ export const initialArray = [
   },
   {
     title: "aa",
-    author: "bb",
-    year: "2005",
-    pages: "2005",
+    author: "cc",
+    year: "2006",
+    pages: "1999",
     type: "ee",
     status: "reading",
     dateCreated: "2020-06-17T18:33:69.468Z",

@@ -1,33 +1,33 @@
+import { BookStateObject } from "../ts/interfaces/interfaces";
+
 export function sortByTitle() {
-  return function (a, b) {
+  return function (a: BookStateObject, b: BookStateObject) {
     return a.title.localeCompare(b.title);
   };
 }
 
 export function sortByAuthor() {
-  return function (a, b) {
+  return function (a: BookStateObject, b: BookStateObject) {
     return a.author.localeCompare(b.author);
   };
 }
 
 export function sortByYear() {
-  return function (a, b) {
-    if (a.year > b.year) return 1;
-    if (a.year < b.year) return -1;
-    return 0;
+  return function (a: BookStateObject, b: BookStateObject) {
+    return +a.year - +b.year;
   };
 }
 
 export function sortByPages() {
-  return function (a, b) {
-    if (a.pages > b.pages) return 1;
-    if (a.pages < b.pages) return -1;
-    return 0;
+  return function (a: BookStateObject, b: BookStateObject) {
+    return +a.pages - +b.pages;
   };
 }
 
 export function sortByDate() {
-  return function (a, b) {
-    return;
+  return function (a: BookStateObject, b: BookStateObject) {
+    if (a > b) return 1;
+    if (a < b) return -1;
+    return 0;
   };
 }
