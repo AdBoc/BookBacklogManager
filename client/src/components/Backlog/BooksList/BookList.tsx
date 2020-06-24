@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { sortByTitle, sortByAuthor, sortByPages, sortByYear, sortByDate } from '../../../_helpers/sorting';
-import { BookStateObject } from "../../../ts/interfaces/interfaces";
+import { BookStateObject, SortingOptions } from "../../../ts/interfaces/interfaces";
 
 interface IProps {
   bookArray: BookStateObject[];
-  sort: string;
+  sortingOptions: SortingOptions;
 }
 
-const BookList: React.FC<IProps> = ({ bookArray, sort }) => {
-  const [id, setId] = useState<any>(undefined);
+const BookList: React.FC<IProps> = ({ bookArray, sortingOptions }) => {
+  const [id, setId] = useState<number>(-1);
 
   const handleElement = (e: any) => {
-    +(id!) === +(e.target.id) ? setId(undefined) : setId(+(e.target.id));
+    +(id) === +(e.target.id) ? setId(-1) : setId(+(e.target.id)); //jesli stare id jest rowne nowemu id to ustawia sie na undefined jesli jest inne to id jest zmieniane na e.target.id, router moze byc lepszy niz to 
   }
 
   const sortArray = () => {
-    switch (sort) {
+    switch (sortingOptions.sort) {
       case "title":
         return sortByTitle();
-      case "Author":
+      case "author":
         return sortByAuthor();
       case "pages":
         return sortByPages();
@@ -26,14 +26,26 @@ const BookList: React.FC<IProps> = ({ bookArray, sort }) => {
         return sortByYear();
       case "new":
         return sortByDate();
-      default:
-        return undefined;
     }
+  }
+
+  const sortedAndFilteredArray = (): BookStateObject[] => {
+    let sortedArray = bookArray;
+
+    sortedArray.sort(sortArray());
+    if (sortingOptions.status !== 'All') {
+      sortedArray = sortedArray.filter((item: BookStateObject) => { return item.status === sortingOptions.status });
+    }
+    if (sortingOptions.type !== 'All') {
+      sortedArray = sortedArray.filter((item: BookStateObject) => { return item.type === sortingOptions.type });
+    }
+
+    return sortedArray;
   }
 
   return (
     <div className="BookList__list">
-      {bookArray.length ? bookArray.sort(sortArray()).map((item, index) => {
+      {bookArray.length ? sortedAndFilteredArray().map((item, index) => {
         return (
           <div key={index}>
             <ul className="BookList__list__item" id={index.toString()} onClick={handleElement}>
@@ -52,7 +64,7 @@ const BookList: React.FC<IProps> = ({ bookArray, sort }) => {
             ) : null}
           </div>
         )
-      }) : (<div>Empty</div>)}
+      }) : (<div>Backlog list is empty or loading</div>)}
     </div>
   )
 }

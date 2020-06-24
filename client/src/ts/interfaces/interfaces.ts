@@ -18,3 +18,9 @@ interface BookListsFilterObject {
 }
 
 export interface BookListFilters extends Array<BookListsFilterObject> {}
+
+export interface SortingOptions {
+  sort: string;
+  status: string;
+  type: string;
+}

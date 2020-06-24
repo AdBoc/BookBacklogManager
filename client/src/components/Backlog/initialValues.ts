@@ -11,11 +11,11 @@ export const initialBookState = {
 };
 
 export const sortSelect: BookListFilters = [
+  { value: "new", label: "New" },
   { value: "title", label: "Title" },
   { value: "author", label: "Author" },
   { value: "pages", label: "Pages" },
   { value: "year", label: "Year" },
-  { value: "new", label: "New" },
 ];
 
 export const statusSelect: BookListFilters = [

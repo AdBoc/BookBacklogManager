@@ -1,16 +1,17 @@
 import React from 'react';
-import { BookListFilters } from "../../ts/interfaces/interfaces";
+import { BookListFilters, SortingOptions } from "../../ts/interfaces/interfaces";
 
 interface IProps {
   options: BookListFilters;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<SortingOptions>>
   name: string;
 }
 
 const Select: React.FC<IProps> = ({ options, setValue, name }) => {
 
   const handleChange = (e: any) => {
-    setValue(e.target.value);
+    const { value } = e.target;
+    setValue((prev: any) => ({ ...prev, [name]: value }));
   }
 
   return (

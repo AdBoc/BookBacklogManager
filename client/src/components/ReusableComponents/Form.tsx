@@ -10,7 +10,7 @@ interface IProps {
 const Form: React.FC<IProps> = ({ object, submit, handleChange }) => {
   return (
     <form onSubmit={submit}>
-      {Object.keys(object).filter((item) => { if (item !== 'dateCreated' && item !== 'status') return item }).map((item, index) => {
+      {Object.keys(object).filter((item) => { if (item !== 'dateCreated' && item !== 'status') return item; return null }).map((item, index) => {
         return (
           <input key={index} onChange={handleChange} type="text" placeholder={item} name={item} required />
         )

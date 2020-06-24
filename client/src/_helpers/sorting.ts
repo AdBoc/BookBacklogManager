@@ -26,8 +26,8 @@ export function sortByPages() {
 
 export function sortByDate() {
   return function (a: BookStateObject, b: BookStateObject) {
-    if (a > b) return 1;
-    if (a < b) return -1;
+    if (a.dateCreated > b.dateCreated) return -1;
+    if (b.dateCreated < a.dateCreated) return 1;
     return 0;
   };
 }
