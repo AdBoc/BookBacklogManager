@@ -5,7 +5,7 @@ export const initialBookState = {
   author: "",
   year: "",
   pages: "",
-  type: "",
+  type: "Fiction",
   status: "",
   dateCreated: "",
 };

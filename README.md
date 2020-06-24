@@ -5,3 +5,4 @@
 0.1.4 - small code refractor in BooksList component
 0.1.5 - better typescript integration in project
 0.1.6 - books are now filtered and sorted
+0.1.7 - select instead of plain text input field
