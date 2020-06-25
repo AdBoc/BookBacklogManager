@@ -20,7 +20,7 @@ export function sortByYear() {
 
 export function sortByPages() {
   return function (a: BookStateObject, b: BookStateObject) {
-    return +a.pages - +b.pages;
+    return +b.pages - +a.pages;
   };
 }
 

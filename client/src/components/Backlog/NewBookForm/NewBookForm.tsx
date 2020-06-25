@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BookStateObject } from '../../../ts/interfaces/interfaces';
 import { initialBookState } from '../initialValues';
+import { v4 as uuidv4 } from 'uuid';
 
 interface IProps {
   setBookArray: React.Dispatch<React.SetStateAction<BookStateObject[]>>;
@@ -20,6 +21,7 @@ const NewBookForm: React.FC<IProps> = ({ setBookArray, bookArray }) => {
     let currentBook = newBook;
     currentBook.status = 'On Backlog';
     currentBook.dateCreated = new Date().toISOString();
+    currentBook.id = uuidv4();
     setBookArray([...bookArray, currentBook]);
     setNewBook(initialBookState);
   }
@@ -33,8 +35,8 @@ const NewBookForm: React.FC<IProps> = ({ setBookArray, bookArray }) => {
     <form onSubmit={submitNewBook}>
       <input type="text" placeholder="title" name="title" onChange={handleChange} required />
       <input type="text" placeholder="author" name="author" onChange={handleChange} required />
-      <input type="text" placeholder="year" name="year" onChange={handleChange} required />
-      <input type="text" placeholder="pages" name="pages" onChange={handleChange} required />
+      <input type="text" placeholder="year" name="year" onChange={handleChange} />
+      <input type="text" placeholder="pages" name="pages" onChange={handleChange} />
       <select onChange={handleSelect}>
         <option value="Fiction" placeholder="Fiction">Fiction</option>
         <option value="NonFiction" placeholder="NonFiction">Non Fiction</option>

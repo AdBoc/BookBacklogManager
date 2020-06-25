@@ -1,5 +1,6 @@
 export const initialArray = [
   {
+    id: "dadasadzx",
     title: "Zbrodnia i Kara",
     author: "Fidor Dostojewski",
     year: "1866",
@@ -9,6 +10,7 @@ export const initialArray = [
     dateCreated: "2020-06-17T18:32:37.468Z",
   },
   {
+    id: "rgbd",
     title: "Idiota",
     author: "Fidor Dostojewski",
     year: "1860",
@@ -18,6 +20,7 @@ export const initialArray = [
     dateCreated: "2020-06-17T18:33:69.468Z",
   },
   {
+    id: "kjljuhv",
     title: "Czlowiek w poszukiwaniu sensu",
     author: "Viktor Frankl",
     year: "1968",
@@ -27,6 +30,7 @@ export const initialArray = [
     dateCreated: "2020-06-17T18:34:69.468Z",
   },
   {
+    id: "xcbghjf",
     title: "1984",
     author: "Orwell",
     year: "1950",
@@ -36,6 +40,7 @@ export const initialArray = [
     dateCreated: "2020-06-17T18:35:37.468Z",
   },
   {
+    id: "wrtuyuy",
     title: "Anna Karenina",
     author: "Tolstoj",
     year: "1900",
@@ -45,6 +50,7 @@ export const initialArray = [
     dateCreated: "2020-06-17T18:36:69.468Z",
   },
   {
+    id: "fdxZgfdhjx",
     title: "Pułapki myślenia. O myśleniu szybkim i wolnym",
     author: "Daniel Kahneman",
     year: "2000",

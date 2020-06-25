@@ -6,3 +6,8 @@
 0.1.5 - better typescript integration in project
 0.1.6 - books are now filtered and sorted
 0.1.7 - select instead of plain text input field
+0.1.8 - Book list element is now created differently as separate component
+
+TO DO:
+Komponent do wyswietlania tabeli ktora jest kliknieta. (Lub link dla specjalnego uzycia)
+Walidacja.

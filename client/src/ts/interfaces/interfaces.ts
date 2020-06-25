@@ -3,6 +3,7 @@ export interface SideProps {
 }
 
 export interface BookStateObject {
+  id: string;
   title: string;
   author: string;
   year: string;
