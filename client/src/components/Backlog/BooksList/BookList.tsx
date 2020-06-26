@@ -6,15 +6,18 @@ import BookListElement from '../BookListElement/BookListElement';
 interface IProps {
   bookArray: BookStateObject[];
   sortingOptions: SortingOptions;
+  setBookArray: React.Dispatch<React.SetStateAction<BookStateObject[]>>;
 }
 
-const BookList: React.FC<IProps> = ({ bookArray, sortingOptions }) => {
+const initialObjectState = { id: "", title: "", author: "", year: "", pages: "", type: "", status: "", dateCreated: "" };
+
+const BookList: React.FC<IProps> = ({ bookArray, sortingOptions, setBookArray }) => {
   const [isElementVisibile, setIsElementVisibile] = useState<boolean>(false);
-  const [bookObjectInfo, setBookObjectInfo] = useState<any>({})
+  const [bookObjectInfo, setBookObjectInfo] = useState<BookStateObject>(initialObjectState);
 
   const handleClick = (item: BookStateObject) => {
+    isElementVisibile ? setBookObjectInfo(initialObjectState) : setBookObjectInfo(item);
     setIsElementVisibile((prev) => !prev);
-    setBookObjectInfo(item);
   }
 
   const sortArray = () => {
@@ -58,7 +61,7 @@ const BookList: React.FC<IProps> = ({ bookArray, sortingOptions }) => {
           )
         }) : (<div>Backlog list is empty or loading</div>)}
       </div>
-      {isElementVisibile && <BookListElement book={bookObjectInfo} />}
+      {isElementVisibile && <BookListElement book={bookObjectInfo} bookArray={bookArray} setBookArray={setBookArray} close={handleClick} />}
     </div>
   )
 }

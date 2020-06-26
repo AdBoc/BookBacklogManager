@@ -23,7 +23,7 @@ const BooksList = (): JSX.Element => {
       <Select name="status" options={statusSelect} setValue={setSortingOptions} />
       <Select name="type" options={typeSelect} setValue={setSortingOptions} />
       <p>Total number of books {bookArray.length}</p>
-      <BookList bookArray={bookArray} sortingOptions={sortingOptions} />
+      <BookList bookArray={bookArray} sortingOptions={sortingOptions} setBookArray={setBookArray} />
       <button className="BookList__button" onClick={handleNewBook}>Add new book</button>
       {addBook && <NewBookForm setBookArray={setBookArray} bookArray={bookArray} />}
     </div>
