@@ -1,15 +1,25 @@
 import React, { useContext } from 'react';
 import { themeContext } from '../../contexts/themeContext';
+import { connect } from 'react-redux';
 
-const CurrentReads = () => {
+const CurrentReads = (props: any) => {
   const value = useContext(themeContext);
 
   return (
-    <div>Current Reads</div>
+    <>
+      <div>Current Reads</div>
+      <div>Current Theme: {value}</div>
+    </>
   )
 }
 
-export default CurrentReads;
+const mapStateToProps = (state: any) => {
+  return {
+    book: state
+  }
+}
+
+export default connect(mapStateToProps)(CurrentReads);
 
 
 // import React, { useState, useEffect, useLayoutEffect } from 'react';
