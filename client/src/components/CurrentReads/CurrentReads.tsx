@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { themeContext } from '../../contexts/themeContext';
 
 const CurrentReads = () => {
-    return (
-        <div>Current Reads</div>
-    )
+  const value = useContext(themeContext);
+
+  return (
+    <div>Current Reads</div>
+  )
 }
 
 export default CurrentReads;
