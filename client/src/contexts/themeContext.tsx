@@ -4,17 +4,17 @@ type Props = {
   children: React.ReactNode;
 };
 
-const defaultTheme = 'light';
+const defaultTheme: any = 'light';
 export const themeContext = createContext(defaultTheme);
 
-const ThemeContextProvicer = ({ children }: Props) => {
-  const [theme, setTheme] = useState<string>(defaultTheme);
+const ThemeContextProvider = ({ children }: Props) => {
+  const [theme, setTheme] = useState(defaultTheme);
 
   return (
-    <themeContext.Provider value={theme}>
+    <themeContext.Provider value={{ theme, setTheme }}>
       {children}
     </themeContext.Provider>
   );
 };
 
-export default ThemeContextProvicer;
+export default ThemeContextProvider;

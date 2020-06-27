@@ -8,6 +8,7 @@ import Backlog from './components/Backlog/Backlog';
 import CurrentReads from './components/CurrentReads/CurrentReads';
 
 import './styles/scss/index.scss';
+import Customization from './components/Customization/Customization';
 
 const App: React.FC = (): JSX.Element => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = (): JSX.Element => {
         <Route exact path='/backlog' component={Backlog} />
         <Route exact path='/currentReads' component={CurrentReads} />
         <Route exact path='/login' component={() => <div>Component not ready yet</div>} />
+        <Route exact path='/customization' component={Customization} />
         <Route component={() => <Redirect to='/' />} />
       </Switch>
     </Router>

@@ -1,0 +1,11 @@
+@import "../../assets/scss/variables.scss";
+
+.light-mode {
+  background-color: $background--color;
+  color: $main--font;
+}
+
+.dark-mode {
+  background-color: $background--color--dark;
+  color: $main--font--dark;
+}

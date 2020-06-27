@@ -10,6 +10,7 @@
 0.1.9 - Deleting list elements is now possible
 0.2 - added simple Theme context with Hooks
 0.2.1 - added books to local state in redux
+0.2.2 - added change theme button in customization component, added customization component to routes
 
 TO DO:
 Komponent do wyswietlania tabeli ktora jest kliknieta. (Lub link dla specjalnego uzycia)

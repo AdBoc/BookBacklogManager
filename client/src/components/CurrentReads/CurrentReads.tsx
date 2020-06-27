@@ -1,45 +1,35 @@
-import React, { useContext } from 'react';
-import { themeContext } from '../../contexts/themeContext';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-const CurrentReads = (props: any) => {
-  const value = useContext(themeContext);
+const CurrentReads = () => {
+  const store = useSelector(store => store);
 
   return (
-    <>
-      <div>Current Reads</div>
-      <div>Current Theme: {value}</div>
-    </>
+    <div>Current Reads</div>
   )
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    book: state
-  }
-}
+export default CurrentReads;
 
-export default connect(mapStateToProps)(CurrentReads);
+// import React, { useContext } from 'react';
+// import { themeContext } from '../../contexts/themeContext';
+// import { connect } from 'react-redux';
 
+// const CurrentReads = ({ booksList }: any) => {
+//   const value = useContext(themeContext);
 
-// import React, { useState, useEffect, useLayoutEffect } from 'react';
+//   console.log(booksList);
 
-// const CurrentReads = () => {
-//     const [size, setSize] = useState([0, 0]);
-//     useLayoutEffect(() => {
-//         function updateSize() {
-//             setSize([window.innerWidth, window.innerHeight]);
-//         }
-//         window.addEventListener('resize', updateSize);
-//         updateSize();
-//         return () => window.removeEventListener('resize', updateSize);
-//     }, []);
-
-//     console.log(size);
-
-//     return (
-//         <div>AA</div>
-//     )
+//   return (
+//     <>
+//       <div>Current Reads</div>
+//       <div>Current Theme: {value}</div>
+//     </>
+//   )
 // }
 
-// export default CurrentReads;
+// const mapStateToProps = (state: any) => {
+//   return { booksList: state };
+// }
+
+// export default connect(mapStateToProps)(CurrentReads);
