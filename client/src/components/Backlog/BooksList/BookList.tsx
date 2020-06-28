@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { sortByTitle, sortByAuthor, sortByPages, sortByYear, sortByDate } from '../../../_helpers/sorting';
 import { BookStateObject, SortingOptions } from "../../../ts/interfaces/interfaces";
 import BookListElement from '../BookListElement/BookListElement';
+import { useSelector } from 'react-redux';
 
 interface IProps {
-  bookArray: BookStateObject[];
   sortingOptions: SortingOptions;
-  setBookArray: React.Dispatch<React.SetStateAction<BookStateObject[]>>;
 }
 
-const initialObjectState = { id: "", title: "", author: "", year: "", pages: "", type: "", status: "", dateCreated: "" };
+const initialObjectState = { id: "", title: "", author: "", year: "", pages: "", type: "", status: "", dateCreated: "" }; //zawiera inormacje na temat obecnie kliknietej pozycji, informacje te sa przeekazywane dalej do book list element do wyswietlenia
 
-const BookList: React.FC<IProps> = ({ bookArray, sortingOptions, setBookArray }) => {
+const BookList: React.FC<IProps> = ({ sortingOptions }) => {
+  const bookArray = useSelector((store: BookStateObject[]) => store);
   const [isElementVisibile, setIsElementVisibile] = useState<boolean>(false);
   const [bookObjectInfo, setBookObjectInfo] = useState<BookStateObject>(initialObjectState);
 
@@ -61,7 +61,7 @@ const BookList: React.FC<IProps> = ({ bookArray, sortingOptions, setBookArray })
           )
         }) : (<div>Backlog list is empty or loading</div>)}
       </div>
-      {isElementVisibile && <BookListElement book={bookObjectInfo} bookArray={bookArray} setBookArray={setBookArray} close={handleClick} />}
+      {isElementVisibile && <BookListElement book={bookObjectInfo} close={handleClick} />}
     </div>
   )
 }

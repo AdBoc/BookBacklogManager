@@ -9,12 +9,19 @@ export interface BookStateObject {
   dateCreated: string;
 }
 
-export const SHOW = "SHOW";
+export const ADD_BOOK = "ADD_BOOK";
+export const REMOVE_BOOK = "REMOVE_BOOK";
 
-export interface ShowBooks {
-  type: typeof SHOW;
+export interface AddBook {
+  type: typeof ADD_BOOK;
+  payload: BookStateObject;
 }
 
-export type BookActionTypes = ShowBooks;
+export interface RemoveBook {
+  type: typeof REMOVE_BOOK;
+  payload: number;
+}
+
+export type BookActionTypes = AddBook | RemoveBook;
 
 export type BookActions = BookActionTypes;
