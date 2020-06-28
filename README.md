@@ -12,6 +12,7 @@
 0.2.1 - added books to local state in redux
 0.2.2 - added change theme button in customization component, added customization component to routes
 0.2.3 - Book Array now comes from redux
+0.2.4 - added current reads to CurrentReads component
 
 TO DO:
 Komponent do wyswietlania tabeli ktora jest kliknieta. (Lub link dla specjalnego uzycia)
