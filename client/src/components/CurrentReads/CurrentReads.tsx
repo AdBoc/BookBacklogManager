@@ -1,13 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { BookStateObject } from '../../redux/Books/interfaces';
 
-const CurrentReads = () => {
-  const bookArray = useSelector((store: any) => store);
+const CurrentReads: React.FC = () => {
+  const bookArray = useSelector((store: BookStateObject[]) => store);
 
   return (
     <>
       <div>Current Reads</div>
-      {bookArray ? (bookArray.filter((item: any) => { return item.status === 'Currently Reading' }).map((item: any) => {
+      {bookArray ? (bookArray.filter((item: BookStateObject) => { return item.status === 'Currently Reading' }).map((item: BookStateObject) => {
         return (
           <div key={item.id}>
             <ul className="BookList__list__item" id={item.id}>

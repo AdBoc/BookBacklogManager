@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "0.1 - first CRA commit",
   "scripts": {
-    "client": "cd client && npm run start"
+    "client": "cd client && npm run start",
+    "server": "cd api && npm run start"
   },
   "repository": {
     "type": "git",
@@ -14,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/AdBoc/BookBacklogManager/issues"
   },
-  "homepage": "https://github.com/AdBoc/BookBacklogManager#readme"
+  "homepage": "https://github.com/AdBoc/BookBacklogManager#readme",
+  "dependencies": {}
 }

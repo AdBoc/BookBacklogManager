@@ -1,3 +1,5 @@
+"server": "cd api && deno run -A index.ts"
+
 // import React, { useState, useEffect, useLayoutEffect } from 'react';
 
 // const CurrentReads = () => {
