@@ -15,6 +15,7 @@
 0.2.4 - added current reads to CurrentReads component
 0.2.5 - stated adding node backend 
 0.2.6 - added create user and book route in API
+0.2.7 - preprared project to make bookList schema
 
 TO DO:
 Validation

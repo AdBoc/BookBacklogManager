@@ -15,6 +15,12 @@ class UserRoutes {
     }
   }
 
+  async login(req, res) {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(404).end();9
+    res.status(200).end();
+  }
+
   async createBook({ body }, res) {
     try {
       await User.findByIdAndUpdate('5efcd98efd12f535e0a072a6', { $push: { books: body } });
