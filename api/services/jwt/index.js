@@ -1,8 +1,8 @@
-// import jwt from 'jsonwebtoken';
-// import jwtConfig from '../../config';
+import jwt from 'jsonwebtoken';
+import { jwtConfig } from '../../config';
 
-// export const sign = () => {
-//     return jwt.sign({
-//         id: user.id
-//     }, process.jwtSecret, jwtConfig.expiresIn)
-// };
+export const createToken = (user) => {
+    return jwt.sign({
+        id: user.id
+    }, jwtConfig.jwtSecret, jwtConfig.options);
+};

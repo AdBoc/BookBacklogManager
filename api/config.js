@@ -6,7 +6,7 @@ export const httpConfig = {
 export const mongoConfig = {
   host: 'mongodb://localhost/booksUser',
   options: {
-    debug: true,
+    // debug: true,
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -14,7 +14,9 @@ export const mongoConfig = {
   }
 };
 
-export const jtwConfig = {
-  expiresIn: "30d",
+export const jwtConfig = {
+  options: {
+    expiresIn: "30d"
+  },
   jwtSecret: 'BZ64nfsxDJ6pgoi'
 }
