@@ -17,6 +17,7 @@
 0.2.6 - added create user and book route in API
 0.2.7 - preprared project to make bookList schema
 0.2.8 - created more routes in backend
+0.2.9 - added login form
 
 TO DO:
 Validation

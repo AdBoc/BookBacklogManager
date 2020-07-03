@@ -32,17 +32,3 @@ class UserRoutes {
 
 const userRoutes = new UserRoutes();
 export default userRoutes;
-
-// await BooksList.create({
-//   userId: 'aaa',
-//   books: {
-//     id: "dadasadzx",
-//     title: "Zbrodnia i Kara",
-//     author: "Fidor Dostojewski",
-//     year: "1866",
-//     pages: "504",
-//     type: "Fiction",
-//     status: "On Backlog",
-//     dateCreated: "2020-06-17T18:32:37.468Z",
-//   }
-// });
