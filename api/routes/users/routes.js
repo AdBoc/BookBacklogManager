@@ -10,7 +10,7 @@ class UserRoutes {
       res.status(201).end();
     } catch (err) {
       if (err.name === 'MongoError' && err.code === 11000) {
-        return res.status(409).json({ message: 'Email or password is wrong' });
+        return res.status(409).json({ message: err });
       } else {
         return res.status(400).json({ message: err });
       }
@@ -23,10 +23,6 @@ class UserRoutes {
       return res.status(200).json({ token });
     }
     return res.status(404).end();
-  }
-
-  async protectedRoute(req, res) {
-    res.status(200).json({ message: "it just works" }); // console.log(user.id);
   }
 }
 

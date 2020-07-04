@@ -25,3 +25,21 @@ export interface SortingOptions {
   status: string;
   type: string;
 }
+
+export interface FormState {
+  formValues: {
+    email: string;
+    password: string;
+    [index: string]: string;
+  };
+  formErrors: {
+    email: string;
+    password: string;
+    [index: string]: string;
+  };
+  formValidity: {
+    email: boolean;
+    password: boolean;
+    [index: string]: boolean;
+  };
+}

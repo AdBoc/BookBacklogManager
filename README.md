@@ -18,6 +18,8 @@
 0.2.7 - preprared project to make bookList schema
 0.2.8 - created more routes in backend
 0.2.9 - added login form
+0.3 - added validation
 
 TO DO:
-Validation
+Cannot make two users in db,
+when confirmed password is filled and password changes it does not notice

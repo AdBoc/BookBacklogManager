@@ -15,6 +15,7 @@ const SideDrawer: React.FC<Props> = ({ handleMenu }): JSX.Element => {
         <Link className="link" to='/backlog'><li className="SideDrawer__Links--link">Backlog</li></Link>
         <Link className="link" to='/login'><li className="SideDrawer__Links--link">Login</li></Link>
         <Link className="link" to='/currentReads'><li className="SideDrawer__Links--link">Current Reads</li></Link>
+        <Link className="link" to='/register'><li className="SideDrawer__Links--link">Register</li></Link>
       </ul>
     </div>
   )
