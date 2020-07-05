@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ThemeContextProvider from './contexts/themeContext';
+import ThemeContextProvider from './hooks/useContext/contexts/themeContext';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 

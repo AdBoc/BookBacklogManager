@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import userRoutes from './routes';
-import { authenticate, verifyToken } from '../../middlewares';
+import { authenticate } from '../../middlewares';
 
 const router = new Router();
 

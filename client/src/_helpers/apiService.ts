@@ -1,63 +1,36 @@
 import axios from "axios";
 
-// class ApiService {
-//   async register(login: any, email: any, password: any) {
-//     try {
-//       const resposne = await axios.post(
-//         "http://localhost:8000/api/user/register",
-//         {
-//           login,
-//           email,
-//           password,
-//         }
-//       );
-//       console.log("user registered");
-//       return resposne;
-//     } catch (error) {
-//       if (error.message === "Request failed with status code 403")
-//         return "Email or Username already exists";
-//       console.log(error.message);
-//       return error;
-//     }
-//   }
-//   login() {}
-//   logout() {}
-// }
-
-// const apiService = new ApiService();
-// export default apiService;
-
-// export async function register(email: any, password: any) {
-//   try {
-//     const resposne = await axios.post(
-//       "http://localhost:8000/api/user/create",
-//       {
-//         email,
-//         password,
-//       }
-//     );
-//     console.log("user registered");
-//     return resposne;
-//   } catch (error) {
-//     if (error.message === "Request failed with status code 403")
-//       return "Email or Username already exists";
-//     console.log(error.message);
-//     return error;
-//   }
-// }
-
-export async function register(email: any, password: any) {
+export async function register(email: string, password: string) {
   try {
-    const resposne = await axios.post("http://localhost:8000/api/user/create", {
-      email: "witek@witek.witekaaagaaa",
-      password: "witekwiteksadaaaaaa",
+    await axios.post("http://localhost:8000/api/user/create", {
+      email,
+      password,
     });
-    console.log("user registered");
-    return resposne;
   } catch (error) {
     if (error.message === "Request failed with status code 403")
       return "Email or Username already exists";
-    console.log(error.message);
     return error;
   }
+}
+
+export function login(email: string, password: string) {
+  axios
+    .post(
+      "http://localhost:8000/api/user/login",
+      {},
+      {
+        auth: {
+          username: email,
+          password,
+        },
+      }
+    )
+    .then((response) => {
+      const token: string = response.data.token;
+      localStorage.setItem("token", JSON.stringify(token));
+      return null;
+    })
+    .catch((error) => {
+      return null;
+    });
 }

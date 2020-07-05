@@ -19,6 +19,7 @@
 0.2.8 - created more routes in backend
 0.2.9 - added login form
 0.3 - added validation
+0.3.1 - added reducer
 
 TO DO:
 Cannot make two users in db,

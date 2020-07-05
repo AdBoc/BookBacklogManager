@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { themeContext } from "../../contexts/themeContext";
+import { themeContext } from "../../hooks/useContext/contexts/themeContext";
 import './Customization.scss';
 
 const Customization: React.FC = (): JSX.Element => {

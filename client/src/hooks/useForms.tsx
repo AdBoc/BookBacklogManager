@@ -56,7 +56,7 @@ export const useForms = (formState: FormState, setFormState: React.Dispatch<Reac
     e.preventDefault();
     const { formValues, formValidity } = formState;
     if (Object.values(formValidity).every(Boolean)) {
-      apiCall("arg2", "arg2");
+      apiCall(formValues.email, formValues.password);
     } else {
       for (let key in formValues) {
         let target = {

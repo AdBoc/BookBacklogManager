@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import { FormState } from '../../ts/interfaces/interfaces';
+import { login } from '../../_helpers/apiService';
 
 const Login: React.FC = (): JSX.Element => {
   const [formState, setFormState] = useState<FormState>({
@@ -17,7 +18,7 @@ const Login: React.FC = (): JSX.Element => {
       password: false
     }
   });
-  const { handleChange, handleSubmit } = useForms(formState, setFormState, () => { console.log("work") });
+  const { handleChange, handleSubmit } = useForms(formState, setFormState, login);
 
   return (
     <div>

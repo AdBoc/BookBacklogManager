@@ -1,13 +1,10 @@
 import React, { createContext, useState } from "react";
-
-type Props = {
-  children: React.ReactNode;
-};
+import { ContextProps } from "../../../ts/types/types";
 
 const defaultTheme: any = 'light';
 export const themeContext = createContext(defaultTheme);
 
-const ThemeContextProvider = ({ children }: Props) => {
+const ThemeContextProvider = ({ children }: ContextProps) => {
   const [theme, setTheme] = useState(defaultTheme);
 
   return (
