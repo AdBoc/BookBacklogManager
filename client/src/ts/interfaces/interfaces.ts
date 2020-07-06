@@ -1,3 +1,5 @@
+import { UserInitialState } from "../../redux/User/interfaces";
+
 export interface SideProps {
   handleMenu(e: React.SyntheticEvent): void;
 }
@@ -44,3 +46,7 @@ export interface FormState {
   };
 }
 
+export interface StoreType {
+  books: BookStateObject[];
+  user: UserInitialState;
+}

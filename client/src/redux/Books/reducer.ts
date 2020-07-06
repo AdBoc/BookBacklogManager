@@ -8,10 +8,7 @@ import { initialArray } from "../../_helpers/dummyData";
 
 const initialState: BookStateObject[] = initialArray;
 
-export function bookReducer(
-  state = initialState,
-  action: BookActionTypes
-): any {
+export function bookReducer(state = initialState, action: BookActionTypes) {
   switch (action.type) {
     case ADD_BOOK:
       return [...state, action.payload];

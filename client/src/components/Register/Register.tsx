@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useForms } from '../../hooks/useForms';
 import { FormState } from '../../ts/interfaces/interfaces';
-import { register } from '../../_helpers/apiService';
 
 const Register: React.FC = (): JSX.Element => {
   const [formState, setFormState] = useState<FormState>({
@@ -21,7 +20,23 @@ const Register: React.FC = (): JSX.Element => {
       confirmPassword: false
     }
   });
-  const { handleChange, handleSubmit } = useForms(formState, setFormState, register);
+  const { handleChange, handleValidation } = useForms(formState, setFormState);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const { formValues, formValidity } = formState;
+    if (Object.values(formValidity).every(Boolean)) {
+      console.log('verified');
+    } else {
+      for (let key in formValues) {
+        let target = {
+          name: key,
+          value: formValues[key]
+        };
+        handleValidation(target);
+      }
+    }
+  };
 
   return (
     <div>

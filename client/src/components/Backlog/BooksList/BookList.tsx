@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { sortByTitle, sortByAuthor, sortByPages, sortByYear, sortByDate } from '../../../_helpers/sorting';
-import { BookStateObject, SortingOptions } from "../../../ts/interfaces/interfaces";
+import { BookStateObject, SortingOptions, StoreType } from "../../../ts/interfaces/interfaces";
 import BookListElement from '../BookListElement/BookListElement';
 import { useSelector } from 'react-redux';
 
@@ -11,7 +11,8 @@ interface IProps {
 const initialObjectState = { id: "", title: "", author: "", year: "", pages: "", type: "", status: "", dateCreated: "" }; //zawiera inormacje na temat obecnie kliknietej pozycji, informacje te sa przeekazywane dalej do book list element do wyswietlenia
 
 const BookList: React.FC<IProps> = ({ sortingOptions }) => {
-  const bookArray = useSelector((store: BookStateObject[]) => store);
+
+  const bookArray = useSelector((store: StoreType) => store.books);
   const [isElementVisibile, setIsElementVisibile] = useState<boolean>(false);
   const [bookObjectInfo, setBookObjectInfo] = useState<BookStateObject>(initialObjectState);
 

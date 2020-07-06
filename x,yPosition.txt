@@ -21,3 +21,77 @@
 // }
 
 // export default CurrentReads;
+
+
+AUTHCONTETX
+// import React, { createContext, useReducer } from "react";
+// import { ContextProps } from "../../../ts/types/types";
+// import { authReducer, initialState } from "../reducers/authReducer";
+
+// export const authContext = createContext<any>(initialState); // to type!!
+
+// const AuthContextProvider = ({ children }: ContextProps): JSX.Element => {
+//   const [authStatus, dispatch] = useReducer(authReducer, initialState);
+
+//   return (
+//     <authContext.Provider value={{ authStatus, dispatch }}>
+//       {children}
+//     </authContext.Provider>
+//   );
+// };
+
+// export default AuthContextProvider;
+
+
+AUTHREDUCER
+// import { LOGIN_SUCCESS } from "../constants/constants";
+// import { InitialState, AuthActionTypes } from "../../../ts/types/types";
+
+// export const initialState = {
+//   isLogged: false,
+//   token: "",
+// };
+
+// export const authReducer = (state: InitialState, action: AuthActionTypes) => {
+//   switch (action.type) {
+//     case LOGIN_SUCCESS:
+//       console.log("success");
+//       return state;
+//     default:
+//       return state;
+//   }
+// };
+
+// export const authReducer = (state: any, action: any) => {
+//   switch (action.type) {
+//     case AUTHORIZE:
+//     case LOGIN_SUCCESS:
+//       localStorage.setItem("token", JSON.stringify(action.payload));
+//       return {
+//         isLogged: true,
+//         token: action.payload,
+//       };
+//     case LOGOUT:
+//       localStorage.removeItem("token");
+//       return {
+//         isLogged: false,
+//         token: null,
+//       };
+//     case LOGIN_FAILURE:
+//       console.log("Login Failure");
+//       return {
+//         isLogged: false,
+//         token: null,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+
+
+CONSTANTS 
+// export const AUTHORIZE = "AUTHORIZE";
+// export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+// export const LOGOUT = "LOGOUT";
+// export const LOGIN_FAILURE = "LOGIN_FAILURE";

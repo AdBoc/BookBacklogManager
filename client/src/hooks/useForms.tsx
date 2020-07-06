@@ -1,6 +1,6 @@
 import { FormState } from '../ts/interfaces/interfaces';
 
-export const useForms = (formState: FormState, setFormState: React.Dispatch<React.SetStateAction<FormState>>, apiCall: any) => {
+export const useForms = (formState: FormState, setFormState: React.Dispatch<React.SetStateAction<FormState>>) => {
 
   const handleChange = ({ target }: any) => {
     const { name, value } = target;
@@ -52,24 +52,8 @@ export const useForms = (formState: FormState, setFormState: React.Dispatch<Reac
     });
   }
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const { formValues, formValidity } = formState;
-    if (Object.values(formValidity).every(Boolean)) {
-      apiCall(formValues.email, formValues.password);
-    } else {
-      for (let key in formValues) {
-        let target = {
-          name: key,
-          value: formValues[key]
-        };
-        handleValidation(target);
-      }
-    }
-  };
-
   return {
     handleChange,
-    handleSubmit
+    handleValidation
   }
 };

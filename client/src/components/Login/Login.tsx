@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import { FormState } from '../../ts/interfaces/interfaces';
-import { login } from '../../_helpers/apiService';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/User/actions';
 
 const Login: React.FC = (): JSX.Element => {
   const [formState, setFormState] = useState<FormState>({
@@ -18,7 +19,24 @@ const Login: React.FC = (): JSX.Element => {
       password: false
     }
   });
-  const { handleChange, handleSubmit } = useForms(formState, setFormState, login);
+  const { handleChange, handleValidation } = useForms(formState, setFormState);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const { formValues, formValidity } = formState;
+    if (Object.values(formValidity).every(Boolean)) {
+      dispatch(login(formValues.email, formValues.password));
+    } else {
+      for (let key in formValues) {
+        let target = {
+          name: key,
+          value: formValues[key]
+        };
+        handleValidation(target);
+      }
+    }
+  };
 
   return (
     <div>

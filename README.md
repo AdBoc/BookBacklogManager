@@ -20,6 +20,7 @@
 0.2.9 - added login form
 0.3 - added validation
 0.3.1 - added reducer
+0.3.2 - added login functionality in redux, deleted login functionality in useReducer
 
 TO DO:
 Cannot make two users in db,
