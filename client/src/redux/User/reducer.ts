@@ -7,11 +7,13 @@ import {
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
+  LOGOUT,
+  AUTHORIZE,
 } from "./interfaces";
 
 const initialState: UserInitialState = {
   isLogging: false,
-  isLogged: false,
+  isLogged: null,
   token: "",
   error: "",
 };
@@ -29,7 +31,7 @@ export function userReducer(
         error: "",
       };
     case LOGIN_SUCCESS:
-      console.log("success");
+      localStorage.setItem("token", action.payload); //temporary
       return {
         isLogging: false,
         isLogged: true,
@@ -41,12 +43,27 @@ export function userReducer(
         isLogging: false,
         isLogged: false,
         token: "",
+        error: "", //return error
+      };
+    case LOGOUT:
+      localStorage.removeItem("token"); //temporary
+      return {
+        ...state,
+        isLogged: false,
+        token: "",
         error: "",
       };
     case REGISTER_REQUEST:
     case REGISTER_SUCCESS:
     case REGISTER_FAILURE:
       return state;
+    case AUTHORIZE:
+      return {
+        isLogging: false,
+        isLogged: action.status,
+        token: action.payload,
+        error: "",
+      };
     default:
       return state;
   }

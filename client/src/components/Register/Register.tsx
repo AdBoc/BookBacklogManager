@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useForms } from '../../hooks/useForms';
 import { FormState } from '../../ts/interfaces/interfaces';
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/User/actions';
 
 const Register: React.FC = (): JSX.Element => {
   const [formState, setFormState] = useState<FormState>({
@@ -21,12 +23,13 @@ const Register: React.FC = (): JSX.Element => {
     }
   });
   const { handleChange, handleValidation } = useForms(formState, setFormState);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const { formValues, formValidity } = formState;
     if (Object.values(formValidity).every(Boolean)) {
-      console.log('verified');
+      dispatch(register(formValues.email, formValues.password));
     } else {
       for (let key in formValues) {
         let target = {

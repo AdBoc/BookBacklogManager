@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BookStateObject } from '../../redux/Books/interfaces';
+import { StoreType } from '../../ts/interfaces/interfaces';
 
 const CurrentReads: React.FC = () => {
-  const bookArray = useSelector((store: BookStateObject[]) => store);
+  const bookArray = useSelector((store: StoreType) => store.books);
 
   return (
     <>

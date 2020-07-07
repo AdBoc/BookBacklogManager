@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookStateObject, SortingOptions } from '../../ts/interfaces/interfaces';
+import { SortingOptions, StoreType } from '../../ts/interfaces/interfaces';
 import Select from '../ReusableComponents/Select';
 import { sortSelect, statusSelect, typeSelect } from './initialValues';
 import BookList from './BooksList/BookList';
@@ -7,8 +7,8 @@ import NewBookForm from './NewBookForm/NewBookForm';
 import { useSelector } from 'react-redux';
 import './Backlog.scss';
 
-const BooksList = (): JSX.Element => {
-  const bookArray = useSelector((store: BookStateObject[]) => store);
+const BooksList: React.FC = (): JSX.Element => {
+  const bookArray = useSelector((store: StoreType) => store.books);
   const [addBook, setAddBook] = useState<boolean>(false);
   const [sortingOptions, setSortingOptions] = useState<SortingOptions>({ sort: 'new', status: 'All', type: 'All' })
 

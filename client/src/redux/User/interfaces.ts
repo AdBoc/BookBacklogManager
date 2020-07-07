@@ -1,6 +1,6 @@
 export interface UserInitialState {
   isLogging: boolean;
-  isLogged: boolean;
+  isLogged: boolean | null;
   token: string;
   error: string;
 }
@@ -12,6 +12,7 @@ export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const LOGOUT = "LOGOUT";
+export const AUTHORIZE = "AUTHORIZE";
 
 export type Action =
   | { type: typeof LOGIN_REQUEST }
@@ -20,4 +21,5 @@ export type Action =
   | { type: typeof REGISTER_REQUEST }
   | { type: typeof REGISTER_SUCCESS }
   | { type: typeof REGISTER_FAILURE }
-  | { type: typeof LOGOUT };
+  | { type: typeof LOGOUT }
+  | { type: typeof AUTHORIZE; payload: string; status: boolean };

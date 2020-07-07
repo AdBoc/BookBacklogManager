@@ -26,6 +26,7 @@ export function login(email: string, password: string) {
       .then((response) => {
         const token: string = response.data.token;
         dispatch(success(token));
+        // window.location.reload(); //temporary
       })
       .catch((error) => {
         dispatch(failure());
@@ -52,6 +53,7 @@ export function register(email: string, password: string) {
     })
       .then((response) => {
         dispatch(success());
+        // window.location.reload(); //temporary
       })
       .catch((error) => {
         dispatch(failure());
@@ -68,3 +70,5 @@ export function register(email: string, password: string) {
     return { type: REGISTER_FAILURE };
   }
 }
+
+export function logout() {}
