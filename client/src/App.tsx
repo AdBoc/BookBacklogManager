@@ -15,16 +15,15 @@ import Customization from './components/Customization/Customization';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AUTHORIZE } from './redux/User/interfaces';
+import PublicRoute from './_helpers/PublicRoute';
 
 const App: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    // if (token) {
-    //   dispatch({ type: AUTHORIZE, payload: token })
-    // }
-    token ? dispatch({ type: AUTHORIZE, payload: token, status: true }) : dispatch({ type: AUTHORIZE, payload: "", status: false })
+    token ? dispatch({ type: AUTHORIZE, payload: token, status: true })
+      : dispatch({ type: AUTHORIZE, payload: "", status: false })
     // eslint-disable-next-line
   }, [])
 
@@ -36,8 +35,8 @@ const App: React.FC = (): JSX.Element => {
         <PrivateRoute exact path='/backlog' component={Backlog} />
         <PrivateRoute exact path='/currentReads' component={CurrentReads} />
         <PrivateRoute exact path='/customization' component={Customization} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={Register} />
+        <PublicRoute exact path='/login' component={Login} />
+        <PublicRoute exact path='/register' component={Register} />
         <Route component={() => <Redirect to='/' />} />
       </Switch>
     </Router>

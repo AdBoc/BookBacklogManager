@@ -46,8 +46,10 @@
 
 0.3.3 - added logout to NavBar.
 
-0.3.4 - added private route 
+0.3.4 - added private route
+
+0.3.5 - added public route
 
 TO DO:
-Cannot make two users in db,
 when confirmed password is filled and password changes it does not notice
+Token should be stored in cookies

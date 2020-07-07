@@ -12,7 +12,6 @@ interface IProps extends RouteProps {
 
 const PrivateRoute = ({ component: Component, ...rest }: IProps) => {
   const isLogged = useSelector((store: StoreType) => store.user.isLogged);
-  console.log(isLogged);
   return (
     <div>
       {(isLogged !== null) ?
