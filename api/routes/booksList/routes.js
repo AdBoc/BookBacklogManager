@@ -18,7 +18,7 @@ class BooksRoutes {
 
   async deleteBook(req, res) {
     try { //check for exceptions
-      await BooksList.updateOne({ userId: req.user.id }, { $pull: { "books": { "_id": "5efe090de9a9852704ff35d8" } } }, { safe: true, multi: true });
+      await BooksList.updateOne({ userId: req.user.id }, { $pull: { "books": { "_id": req.body } } }, { safe: true, multi: true });
       res.status(200).end();
     } catch (err) {
       res.status(400).end();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sortByTitle, sortByAuthor, sortByPages, sortByYear, sortByDate } from '../../../_helpers/sorting';
-import { SortingOptions, StoreType, NewBookData } from "../../../ts/interfaces/interfaces";
+import { SortingOptions, StoreType } from "../../../ts/interfaces/interfaces";
 import BookListElement from '../BookListElement/BookListElement';
 import { useSelector, useDispatch } from 'react-redux';
 import { requestBooks } from '../../../redux/Books/actions';
@@ -10,26 +10,23 @@ interface IProps {
   sortingOptions: SortingOptions;
 }
 
-const newBookData = { title: "", author: "", year: "", pages: "", type: "", status: "", dateCreated: "" }; //zawiera inormacje na temat obecnie kliknietej pozycji, informacje te sa przeekazywane dalej do book list element do wyswietlenia
-
 const BookList: React.FC<IProps> = ({ sortingOptions }) => {
-
+  const selectedBookData = { _id: "", title: "", author: "", year: "", pages: "", type: "", status: "", dateCreated: "" }; //has info about currently clicked position that is send to bookListElement
   const bookArray = useSelector((store: StoreType) => store.books.items);
   const [isElementVisibile, setIsElementVisibile] = useState<boolean>(false);
-  const [bookObjectInfo, setBookObjectInfo] = useState<NewBookData>(newBookData);
+  const [bookObjectInfo, setBookObjectInfo] = useState<BookStateObject>(selectedBookData);
   const dispatch = useDispatch();
   const token = useSelector((store: StoreType) => store.user.token);
 
   useEffect(() => {
     dispatch(requestBooks(token));
+    // eslint-disable-next-line
   }, [])
 
-  const handleClick = (item: NewBookData) => {
-    isElementVisibile ? setBookObjectInfo(newBookData) : setBookObjectInfo(item); //data sent to element showing book
+  const handleClick = (item: BookStateObject) => {
+    isElementVisibile ? setBookObjectInfo(selectedBookData) : setBookObjectInfo(item); //data sent to element showing book
     setIsElementVisibile((prev) => !prev);
   }
-
-  console.log(bookObjectInfo);
 
   const sortArray = () => {
     switch (sortingOptions.sort) {

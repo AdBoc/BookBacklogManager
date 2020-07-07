@@ -52,6 +52,8 @@
 
 0.3.6 - fixed types, book is added to api, books data is now received from api
 
+0.3.7 - added remove book functionality 
+
 TO DO:
 when confirmed password is filled and password changes it does not notice
 Token should be stored in cookies

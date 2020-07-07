@@ -1,4 +1,10 @@
-import { BookStateObject, REQUEST_BOOKS, RECEIVE_BOOKS } from "./interfaces";
+import {
+  BookStateObject,
+  REQUEST_BOOKS,
+  RECEIVE_BOOKS,
+  ADD_SUCCESS,
+  ADD_FAIL,
+} from "./interfaces";
 import { Action } from "./interfaces";
 import Axios from "axios";
 
@@ -45,13 +51,51 @@ export function addBook(book: BookStateObject, token: string) {
         },
       }
     )
-      .then((response) => {})
+      .then((response) => {
+        dispatch(success());
+      })
       .catch((error) => {
-        console.log(error);
+        dispatch(failure());
       });
   };
-  //ADD BOOK
-  //ADD FAIL
+
+  function success(): Action {
+    return { type: ADD_SUCCESS };
+  }
+
+  function failure(): Action {
+    return { type: ADD_FAIL };
+  }
+}
+
+export function removeBook(bookID: string, token: string) {
+  return (dispatch: (func: Action) => void) => {
+    Axios.post(
+      `${url}/delete`,
+      {
+        _id: bookID,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    )
+      .then((response) => {
+        dispatch(success());
+      })
+      .catch((error) => {
+        dispatch(failure());
+      });
+  };
+
+  function success(): Action {
+    return { type: ADD_SUCCESS };
+  }
+
+  function failure(): Action {
+    return { type: ADD_FAIL };
+  }
 }
 
 // export function addBook(newBook: BookStateObject) {

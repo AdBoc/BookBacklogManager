@@ -8,6 +8,7 @@ import {
   REGISTER_FAILURE,
 } from "./interfaces";
 import Axios from "axios";
+import { history } from "../../_helpers/history";
 const url = "http://localhost:8000/api/user";
 
 export function login(email: string, password: string) {
@@ -26,7 +27,7 @@ export function login(email: string, password: string) {
       .then((response) => {
         const token: string = response.data.token;
         dispatch(success(token));
-        // window.location.reload(); //temporary
+        history.push("/");
       })
       .catch((error) => {
         dispatch(failure());
@@ -53,7 +54,7 @@ export function register(email: string, password: string) {
     })
       .then((response) => {
         dispatch(success());
-        // window.location.reload(); //temporary
+        history.push("/login");
       })
       .catch((error) => {
         dispatch(failure());

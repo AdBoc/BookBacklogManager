@@ -3,6 +3,7 @@ import { useForms } from '../../hooks/useForms';
 import { FormState } from '../../ts/interfaces/interfaces';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/User/actions';
+import { Link } from 'react-router-dom';
 
 const Register: React.FC = (): JSX.Element => {
   const [formState, setFormState] = useState<FormState>({
@@ -55,6 +56,7 @@ const Register: React.FC = (): JSX.Element => {
         {formState.formErrors.confirmPassword}
         <button type="submit">Submit</button>
       </form>
+      <Link to="/login">Login</Link>
     </div>
   )
 }

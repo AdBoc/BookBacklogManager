@@ -1,20 +1,20 @@
 import React from 'react';
-import { StoreType, NewBookData } from "../../../ts/interfaces/interfaces";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BookStateObject } from '../../../redux/Books/interfaces';
-// import { removeBook } from '../../../redux/Books/actions';
+import { removeBook } from '../../../redux/Books/actions';
+import { StoreType } from '../../../ts/interfaces/interfaces';
 
 interface IProps {
-  book: NewBookData;
-  close: (item: NewBookData) => void
+  book: BookStateObject;
+  close: (item: BookStateObject) => void
 }
 
 const BookListElement: React.FC<IProps> = ({ book, close }) => {
-  // const bookArray = useSelector((store: StoreType) => store.books);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const token = useSelector((store: StoreType) => store.user.token);
 
   const remove = () => {
-    // dispatch(removeBook(bookArray.indexOf(book)));
+    dispatch(removeBook(book._id, token));
     close(book);
   };
 

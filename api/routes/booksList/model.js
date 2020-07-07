@@ -11,7 +11,10 @@ const BooksListSchema = new Schema({
         pages: { type: String },
         type: { type: String },
         status: { type: String },
-        dateCreated: { type: Date }
+        dateCreated: { type: Date },
+        // pdf: {
+        //     path: { type: String}
+        // }
     }]
 })
 

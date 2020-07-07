@@ -3,6 +3,10 @@ import {
   InitialBookState,
   REQUEST_BOOKS,
   RECEIVE_BOOKS,
+  ADD_SUCCESS,
+  ADD_FAIL,
+  REMOVE_SUCCESS,
+  REMOVE_FAILURE,
 } from "./interfaces";
 
 const initialState: InitialBookState = {
@@ -25,6 +29,11 @@ export function bookReducer(
         isFetching: false,
         items: action.payload,
       };
+    case ADD_SUCCESS:
+    case ADD_FAIL:
+    case REMOVE_SUCCESS:
+    case REMOVE_FAILURE:
+      return state;
     default:
       return state;
   }
