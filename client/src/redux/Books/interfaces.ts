@@ -1,5 +1,5 @@
 export interface BookStateObject {
-  id: string;
+  _id: string;
   title: string;
   author: string;
   year: string;
@@ -9,8 +9,15 @@ export interface BookStateObject {
   dateCreated: string;
 }
 
+export interface InitialBookState {
+  isFetching: boolean;
+  items: BookStateObject[];
+}
+
 export const ADD_BOOK = "ADD_BOOK";
 export const REMOVE_BOOK = "REMOVE_BOOK";
+export const REQUEST_BOOKS = "REQUEST_BOOKS";
+export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
 
 export interface AddBook {
   type: typeof ADD_BOOK;
@@ -22,6 +29,13 @@ export interface RemoveBook {
   payload: number;
 }
 
-export type BookActionTypes = AddBook | RemoveBook;
+export interface RequestBooks {
+  type: typeof REQUEST_BOOKS;
+}
 
-export type BookActions = BookActionTypes;
+export interface ReceiveBooks {
+  type: typeof RECEIVE_BOOKS;
+  payload: BookStateObject[];
+}
+
+export type Action = AddBook | RemoveBook | ReceiveBooks | RequestBooks;

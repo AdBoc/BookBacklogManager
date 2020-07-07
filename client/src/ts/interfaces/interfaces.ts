@@ -1,18 +1,8 @@
 import { UserInitialState } from "../../redux/User/interfaces";
+import { BookStateObject } from "../../redux/Books/interfaces";
 
 export interface SideProps {
   handleMenu(e: React.SyntheticEvent): void;
-}
-
-export interface BookStateObject {
-  id: string;
-  title: string;
-  author: string;
-  year: string;
-  pages: string;
-  type: string;
-  status: string;
-  dateCreated: string;
 }
 
 interface BookListsFilterObject {
@@ -47,6 +37,19 @@ export interface FormState {
 }
 
 export interface StoreType {
-  books: BookStateObject[];
+  books: {
+    isFetching: boolean;
+    items: BookStateObject[];
+  };
   user: UserInitialState;
+}
+
+export interface NewBookData {
+  title: string;
+  author: string;
+  year: string;
+  pages: string;
+  type: string;
+  status: string;
+  dateCreated: string;
 }

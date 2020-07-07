@@ -1,21 +1,53 @@
 import {
-  BookStateObject,
-  BookActionTypes,
-  ADD_BOOK,
-  REMOVE_BOOK,
+  Action,
+  InitialBookState,
+  REQUEST_BOOKS,
+  RECEIVE_BOOKS,
 } from "./interfaces";
-import { initialArray } from "../../_helpers/dummyData";
 
-const initialState: BookStateObject[] = initialArray;
+const initialState: InitialBookState = {
+  isFetching: true,
+  items: [],
+};
 
-export function bookReducer(state = initialState, action: BookActionTypes) {
+export function bookReducer(
+  state = initialState,
+  action: Action
+): InitialBookState {
   switch (action.type) {
-    case ADD_BOOK:
-      return [...state, action.payload];
-    case REMOVE_BOOK:
-      state.splice(action.payload, 1);
-      return [...state];
+    case REQUEST_BOOKS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case RECEIVE_BOOKS:
+      return {
+        isFetching: false,
+        items: action.payload,
+      };
     default:
       return state;
   }
 }
+
+// import {
+//   BookStateObject,
+//   BookActionTypes,
+//   ADD_BOOK,
+//   REMOVE_BOOK,
+// } from "./interfaces";
+// import { initialArray } from "../../_helpers/dummyData";
+
+// const initialState: BookStateObject[] = initialArray;
+
+// export function bookReducer(state = initialState, action: BookActionTypes) {
+//   switch (action.type) {
+//     case ADD_BOOK:
+//       return [...state, action.payload];
+//     case REMOVE_BOOK:
+//       state.splice(action.payload, 1);
+//       return [...state];
+//     default:
+//       return state;
+//   }
+// }

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { SortingOptions, StoreType } from '../../ts/interfaces/interfaces';
+import { SortingOptions } from '../../ts/interfaces/interfaces';
 import Select from '../ReusableComponents/Select';
 import { sortSelect, statusSelect, typeSelect } from './initialValues';
 import BookList from './BooksList/BookList';
 import NewBookForm from './NewBookForm/NewBookForm';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import './Backlog.scss';
 
 const BooksList: React.FC = (): JSX.Element => {
-  const bookArray = useSelector((store: StoreType) => store.books);
+  // const bookArray = useSelector((store: StoreType) => store.books);
   const [addBook, setAddBook] = useState<boolean>(false);
   const [sortingOptions, setSortingOptions] = useState<SortingOptions>({ sort: 'new', status: 'All', type: 'All' })
 
@@ -22,7 +22,7 @@ const BooksList: React.FC = (): JSX.Element => {
       <Select name="sort" options={sortSelect} setValue={setSortingOptions} />
       <Select name="status" options={statusSelect} setValue={setSortingOptions} />
       <Select name="type" options={typeSelect} setValue={setSortingOptions} />
-      <p>Total number of books {bookArray.length}</p>
+      {/* <p>Total number of books {bookArray.length}</p> */}
       <BookList sortingOptions={sortingOptions} />
       <button className="BookList__button" onClick={handleNewBook}>Add new book</button>
       {addBook && <NewBookForm />}

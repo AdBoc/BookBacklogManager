@@ -1,7 +1,6 @@
 import { BookListFilters } from "../../ts/interfaces/interfaces";
 
 export const initialBookState = {
-  id: "",
   title: "",
   author: "",
   year: "",

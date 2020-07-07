@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookStateObject } from '../../ts/interfaces/interfaces';
+import { BookStateObject } from '../../redux/Books/interfaces';
 
 interface IProps {
   object: BookStateObject;

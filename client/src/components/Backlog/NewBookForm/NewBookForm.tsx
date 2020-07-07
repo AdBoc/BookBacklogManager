@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { BookStateObject } from '../../../ts/interfaces/interfaces';
+import { StoreType } from '../../../ts/interfaces/interfaces';
 import { initialBookState } from '../initialValues';
-import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addBook } from '../../../redux/Books/actions';
 
 const NewBookForm: React.FC = () => {
   const dispatch = useDispatch();
-  const [newBookForm, setNewBookForm] = useState<BookStateObject>(initialBookState);
+  const token = useSelector((store: StoreType) => store.user.token);
+  const [newBookForm, setNewBookForm] = useState<any>(initialBookState);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setNewBookForm(prev => ({ ...prev, [name]: value }));
+    setNewBookForm((prev: any) => ({ ...prev, [name]: value }));
   }
 
   const submitNewBook = (e: any) => {
@@ -19,13 +19,12 @@ const NewBookForm: React.FC = () => {
     let newBook = newBookForm;
     newBook.status = 'On Backlog';
     newBook.dateCreated = new Date().toISOString();
-    newBook.id = uuidv4();
-    dispatch(addBook(newBook)); // setNewBookForm(initialBookState); //turn off newBookForm after adding one
+    dispatch(addBook(newBook, token))
   }
 
   const handleSelect = (e: any) => {
     const { value } = e.target;
-    setNewBookForm(prev => ({ ...prev, type: value }));
+    setNewBookForm((prev: any) => ({ ...prev, type: value }));
   }
 
   return (

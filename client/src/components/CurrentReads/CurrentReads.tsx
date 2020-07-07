@@ -4,17 +4,17 @@ import { BookStateObject } from '../../redux/Books/interfaces';
 import { StoreType } from '../../ts/interfaces/interfaces';
 
 const CurrentReads: React.FC = () => {
-  const bookArray = useSelector((store: StoreType) => store.books);
+  const bookArray = useSelector((store: StoreType) => store.books.items);
 
   return (
     <>
       <div>Current Reads</div>
       {bookArray ? (bookArray.filter((item: BookStateObject) => { return item.status === 'Currently Reading' }).map((item: BookStateObject) => {
         return (
-          <div key={item.id}>
-            <ul className="BookList__list__item" id={item.id}>
-              <li id={item.id}>{item.title}</li>
-              <li id={item.id}>{item.author}</li>
+          <div key={item._id}>
+            <ul className="BookList__list__item" id={item._id}>
+              <li id={item._id}>{item.title}</li>
+              <li id={item._id}>{item.author}</li>
             </ul>
           </div>)
       })) : (

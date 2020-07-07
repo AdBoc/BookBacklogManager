@@ -1,4 +1,4 @@
-import { BookStateObject } from "../ts/interfaces/interfaces";
+import { BookStateObject } from "../redux/Books/interfaces";
 
 export function sortByTitle() {
   return function (a: BookStateObject, b: BookStateObject) {
