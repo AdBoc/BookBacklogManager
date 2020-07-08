@@ -7,6 +7,7 @@ import {
   ADD_FAIL,
   REMOVE_SUCCESS,
   REMOVE_FAILURE,
+  DOWNLOAD_BOOK,
 } from "./interfaces";
 
 const initialState: InitialBookState = {
@@ -33,6 +34,7 @@ export function bookReducer(
     case ADD_FAIL:
     case REMOVE_SUCCESS:
     case REMOVE_FAILURE:
+    case DOWNLOAD_BOOK:
       return state;
     default:
       return state;

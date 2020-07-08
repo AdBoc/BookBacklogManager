@@ -20,6 +20,7 @@ export const REQUEST_BOOKS = "REQUEST_BOOKS";
 export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
 export const REMOVE_SUCCESS = "REMOVE_SUCCESS";
 export const REMOVE_FAILURE = "REMOVE_FAILURE";
+export const DOWNLOAD_BOOK = "DOWNLOAD_BOOK";
 
 export interface AddBook {
   type: typeof ADD_SUCCESS;
@@ -48,10 +49,15 @@ export interface RemoveFailure {
   type: typeof REMOVE_FAILURE;
 }
 
+export interface Download {
+  type: typeof DOWNLOAD_BOOK;
+}
+
 export type Action =
   | AddBook
   | AddFail
   | ReceiveBooks
   | RequestBooks
   | RemoveSuccess
-  | RemoveFailure;
+  | RemoveFailure
+  | Download;

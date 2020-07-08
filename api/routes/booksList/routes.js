@@ -1,4 +1,6 @@
 import BooksList from './model';
+import path from 'path';
+const filePath = process.cwd();
 
 class BooksRoutes {
   async addBook(req, res) {
@@ -17,7 +19,7 @@ class BooksRoutes {
   }
 
   async deleteBook(req, res) {
-    try { //check for exceptions
+    try {
       await BooksList.updateOne({ userId: req.user.id }, { $pull: { "books": { "_id": req.body } } }, { safe: true, multi: true });
       res.status(200).end();
     } catch (err) {
@@ -27,23 +29,20 @@ class BooksRoutes {
   }
 
   async updateBook(req, res) {
+  }
 
+  async uploadBook(req, res) {
+    res.status(200).end();
+  }
+
+  async downloadBook(req, res) {
+    try {
+      res.download(path.join(filePath, '/dist/B2.pdf'));
+    } catch (err) {
+      res.status(400).end();
+    }
   }
 }
 
 const booksRoutes = new BooksRoutes();
 export default booksRoutes;
-
-// const result = await BooksList.find({}, { _id: req.user.id, books: { $elemMatch: { _id: "5efe090de9a9852704ff35d8" } } });
-// console.log(result);
-
-// const result = await BooksList.find({}, (err, res) => { console.log(res[0]._id) });
-
-// const result = await BooksList.findOne({ userId: req.user.id }, (err, res) => {
-//   let arrIndex;
-//   res.books.map((element, i) => {
-//     if (element._id == '5efe090de9a9852704ff35d8')
-//       arrIndex = i;
-//   })
-//   res.books.splice(arrIndex, 1);
-// });

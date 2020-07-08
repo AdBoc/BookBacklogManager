@@ -4,6 +4,7 @@ import {
   RECEIVE_BOOKS,
   ADD_SUCCESS,
   ADD_FAIL,
+  DOWNLOAD_BOOK,
 } from "./interfaces";
 import { Action } from "./interfaces";
 import Axios from "axios";
@@ -98,10 +99,49 @@ export function removeBook(bookID: string, token: string) {
   }
 }
 
-// export function addBook(newBook: BookStateObject) {
-//   return { type: ADD_BOOK, payload: newBook };
-// }
+export function downloadBook(token: string) {
+  return (dispatch: (func: Action) => void) => {
+    Axios.get(`${url}/download`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      responseType: "blob", //{responseType: 'arraybuffer}
+    })
+      .then((response) => {
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, "_blank");
+        dispatch(success());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  function success(): Action {
+    return { type: DOWNLOAD_BOOK };
+  }
+}
 
-// export function removeBook(bookID: number) {
-//   return { type: REMOVE_BOOK, payload: bookID };
-// }
+export function uploadBook(token: string, file: any) {
+  Axios.post(`${url}/upload`, file, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
+    .then((response) => {})
+    .catch((error) => {});
+}
+
+// res.sendFile(file, {headers: {'Content-Type': 'image/jpeg'}})
+
+// const link = document.createElement("a");
+// link.href = window.URL.createObjectURL(blob);
+// link.download = "Report_" + new Date() + ".pdf";
+// link.click();
+
+// var file = fs.createReadStream('./public/modules/datacollectors/output.pdf');
+// var stat = fs.statSync('./public/modules/datacollectors/output.pdf');
+// res.setHeader('Content-Length', stat.size);
+// res.setHeader('Content-Type', 'application/pdf');
+// res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
+// file.pipe(res);

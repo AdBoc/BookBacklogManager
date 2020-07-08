@@ -52,8 +52,11 @@
 
 0.3.6 - fixed types, book is added to api, books data is now received from api
 
-0.3.7 - added remove book functionality 
+0.3.7 - added remove book functionality
+
+0.3.8 - added first version of book dowload and upload
 
 TO DO:
-when confirmed password is filled and password changes it does not notice
+Book stores pathFile
+When confirmed password is filled and password changes it does not notice
 Token should be stored in cookies

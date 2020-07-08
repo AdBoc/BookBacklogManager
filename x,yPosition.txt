@@ -23,6 +23,58 @@
 // export default CurrentReads;
 
 
+
+
+
+
+
+
+
+
+
+READFILES
+
+ // fs.readFile(path.join(filePath, '/dist/B2.pdf'), (err, data) => {
+ //   if (err) { console.log(err) };
+ //   res.writeHead(200, {
+ //     "Content-Type": "application/pdf",
+ //     "Content-Disposition": "attachment; filename=B2.pdf"
+ //   });
+ //   res.write(data);
+ //   res.end();
+ //   // fs.createReadStream(filePath + "/dist/B2.pdf").pipe()
+ // })
+ // res.download(path.join(filePath, '/dist/B2.pdf'), (err) => {
+ //   console.log(err);
+ // });
+
+
+
+UPLOAD FILE -- STORAGE 
+
+
+//// Set storage engine
+// const storage = multer.diskStorage({
+//   destination: "./uploads",
+//   filename: function(req, file, cb) {
+//     // null as first argument means no error
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
+
+//   let encode_file = null;
+//   let fileName = "";
+//   if (req.file) {
+//     fileName = req.file.originalname;
+//     var filepath = path.join(__dirname, req.file.path);
+//     console.log(filepath);
+//     var stream = fs.readFileSync(filepath);
+//     encode_file = stream.toString("base64");
+//   }
+
+
+
+
 export const initialArray = [
   {
     id: "dadasadzx",

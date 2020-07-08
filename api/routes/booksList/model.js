@@ -12,9 +12,7 @@ const BooksListSchema = new Schema({
         type: { type: String },
         status: { type: String },
         dateCreated: { type: Date },
-        // pdf: {
-        //     path: { type: String}
-        // }
+        filePath: { type: String }
     }]
 })
 

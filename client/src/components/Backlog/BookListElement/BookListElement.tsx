@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BookStateObject } from '../../../redux/Books/interfaces';
-import { removeBook } from '../../../redux/Books/actions';
+import { removeBook, downloadBook, uploadBook } from '../../../redux/Books/actions';
 import { StoreType } from '../../../ts/interfaces/interfaces';
 
 interface IProps {
@@ -13,14 +13,24 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
   const dispatch = useDispatch();
   const token = useSelector((store: StoreType) => store.user.token);
 
+  const download = () => {
+    dispatch(downloadBook(token));
+  };
+
   const remove = () => {
     dispatch(removeBook(book._id, token));
     close(book);
   };
 
+  const upload = (e: any) => {
+    const dataForm = new FormData();
+    dataForm.append('file', e.target.files[0]); // new File name
+    uploadBook(token, dataForm);
+  }
+
   const closeElement = () => {
     close(book);
-  }
+  };
 
   return (
     <>
@@ -30,10 +40,10 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
       <div>Release: {book.year}</div>
       <div>Type: {book.type}</div>
       <div>Status: {book.status}</div>
-      <button>download</button>
+      <button onClick={download}>download</button>
       <button>edit</button>
       <button onClick={remove}>remove</button>
-      <button>upload</button>
+      <input type="file" onChange={upload} />
       <button onClick={closeElement}>close</button>
     </>
   )
