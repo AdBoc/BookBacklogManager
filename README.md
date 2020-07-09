@@ -56,6 +56,8 @@
 
 0.3.8 - added first version of book dowload and upload
 
+0.3.9 - added file upload 
+
 TO DO:
 Book stores pathFile
 When confirmed password is filled and password changes it does not notice

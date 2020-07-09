@@ -24,7 +24,7 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
 
   const upload = (e: any) => {
     const dataForm = new FormData();
-    dataForm.append('file', e.target.files[0]); // new File name
+    dataForm.append(book._id, e.target.files[0]);
     uploadBook(token, dataForm);
   }
 

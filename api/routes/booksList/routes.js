@@ -1,6 +1,9 @@
 import BooksList from './model';
 import path from 'path';
-const filePath = process.cwd();
+import { upload } from '../../services/multer';
+import fs from 'fs';
+const rootPath = process.cwd();
+
 
 class BooksRoutes {
   async addBook(req, res) {
@@ -32,12 +35,38 @@ class BooksRoutes {
   }
 
   async uploadBook(req, res) {
-    res.status(200).end();
+    upload(req, res, (err) => {
+      if (err) {
+        console.log(err);
+        res.status(400).end();
+      }
+
+      const bookId = req.files[0].fieldname;
+      const bookFileName = req.files[0].filename;
+
+      BooksList.findOne({ userId: req.user.id }).select({ books: { $elemMatch: { _id: bookId } } }).then((bookData) => {
+        const book = bookData.books[0];
+        const { filePath } = book;
+        if (filePath) {
+          const fileExists = fs.existsSync(rootPath + "\\dist\\" + req.user.id + "\\" + filePath); //must be checked or when deleted filepath properthy should be also deleted
+          if (fileExists)
+            fs.unlinkSync(rootPath + "\\dist\\" + req.user.id + "\\\\" + filePath);
+        }
+        book.filePath = bookFileName;
+        bookData.save((err) => {
+          if (err)
+            console.log(err);
+        })
+      });
+      res.status(200).end();
+    });
   }
 
   async downloadBook(req, res) {
     try {
-      res.download(path.join(filePath, '/dist/B2.pdf'));
+      //user id wejde do folderu 
+      //
+      res.download(path.join(rootPath, '/dist/B2.pdf'));
     } catch (err) {
       res.status(400).end();
     }
@@ -46,3 +75,7 @@ class BooksRoutes {
 
 const booksRoutes = new BooksRoutes();
 export default booksRoutes;
+
+//na poczatku tworze folder id z nazwa uzytkownika
+//do tego folderu zapisywane sa pliki danego usera 
+// BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': bookId }, { "books.$.filePath": req.files[0].filename }); //filtered in second argument
