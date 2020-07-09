@@ -14,7 +14,7 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
   const token = useSelector((store: StoreType) => store.user.token);
 
   const download = () => {
-    dispatch(downloadBook(token));
+    dispatch(downloadBook(book._id, token));
   };
 
   const remove = () => {

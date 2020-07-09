@@ -7,6 +7,7 @@ export interface BookStateObject {
   type: string;
   status: string;
   dateCreated: string;
+  filePath?: string;
 }
 
 export interface InitialBookState {

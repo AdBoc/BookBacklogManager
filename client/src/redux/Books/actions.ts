@@ -99,14 +99,20 @@ export function removeBook(bookID: string, token: string) {
   }
 }
 
-export function downloadBook(token: string) {
+export function downloadBook(bookId: string, token: string) {
   return (dispatch: (func: Action) => void) => {
-    Axios.get(`${url}/download`, {
-      headers: {
-        Authorization: "Bearer " + token,
+    Axios.post(
+      `${url}/download`,
+      {
+        _id: bookId,
       },
-      responseType: "blob", //{responseType: 'arraybuffer}
-    })
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        responseType: "blob", //{responseType: 'arraybuffer}
+      }
+    )
       .then((response) => {
         const blob = new Blob([response.data], { type: "application/pdf" });
         const url = window.URL.createObjectURL(blob);
@@ -121,6 +127,29 @@ export function downloadBook(token: string) {
     return { type: DOWNLOAD_BOOK };
   }
 }
+
+// export function downloadBook(token: string) {
+//   return (dispatch: (func: Action) => void) => {
+//     Axios.get(`${url}/download`, {
+//       headers: {
+//         Authorization: "Bearer " + token,
+//       },
+//       responseType: "blob", //{responseType: 'arraybuffer}
+//     })
+//       .then((response) => {
+//         const blob = new Blob([response.data], { type: "application/pdf" });
+//         const url = window.URL.createObjectURL(blob);
+//         window.open(url, "_blank");
+//         dispatch(success());
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+//   function success(): Action {
+//     return { type: DOWNLOAD_BOOK };
+//   }
+// }
 
 export function uploadBook(token: string, file: any) {
   Axios.post(`${url}/upload`, file, {

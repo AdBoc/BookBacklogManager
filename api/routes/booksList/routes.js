@@ -46,12 +46,6 @@ class BooksRoutes {
 
       BooksList.findOne({ userId: req.user.id }).select({ books: { $elemMatch: { _id: bookId } } }).then((bookData) => {
         const book = bookData.books[0];
-        const { filePath } = book;
-        if (filePath) {
-          const fileExists = fs.existsSync(rootPath + "\\dist\\" + req.user.id + "\\" + filePath); //must be checked or when deleted filepath properthy should be also deleted
-          if (fileExists)
-            fs.unlinkSync(rootPath + "\\dist\\" + req.user.id + "\\\\" + filePath);
-        }
         book.filePath = bookFileName;
         bookData.save((err) => {
           if (err)
@@ -60,13 +54,11 @@ class BooksRoutes {
       });
       res.status(200).end();
     });
-  }
+  }// const { filePath } = book;// if (filePath) {//   const fileExists = fs.existsSync(rootPath + "\\dist\\" + req.user.id + "\\" + filePath); //must be checked or when deleted filepath properthy should be also deleted//   if (fileExists)//     fs.unlinkSync(rootPath + "\\dist\\" + req.user.id + "\\\\" + filePath);// }
 
   async downloadBook(req, res) {
     try {
-      //user id wejde do folderu 
-      //
-      res.download(path.join(rootPath, '/dist/B2.pdf'));
+      res.download(path.join(rootPath, `\\dist\\${req.user.id}\\${req.body._id}.pdf`));
     } catch (err) {
       res.status(400).end();
     }
