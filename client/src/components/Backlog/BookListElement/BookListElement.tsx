@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BookStateObject } from '../../../redux/Books/interfaces';
-import { removeBook, downloadBook, uploadBook } from '../../../redux/Books/actions';
+import { removeBook, downloadBook, uploadBook, editBook } from '../../../redux/Books/actions';
 import { StoreType } from '../../../ts/interfaces/interfaces';
 
 interface IProps {
@@ -32,6 +32,10 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
     close(book);
   };
 
+  const edit = () => {
+    editBook(token);
+  }
+
   return (
     <>
       <div>{book.title}</div>
@@ -41,7 +45,7 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
       <div>Type: {book.type}</div>
       <div>Status: {book.status}</div>
       <button onClick={download}>download</button>
-      <button>edit</button>
+      <button onClick={edit}>edit</button>
       <button onClick={remove}>remove</button>
       <input type="file" onChange={upload} />
       <button onClick={closeElement}>close</button>

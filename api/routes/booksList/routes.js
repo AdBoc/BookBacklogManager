@@ -24,6 +24,7 @@ class BooksRoutes {
   async deleteBook(req, res) {
     try {
       await BooksList.updateOne({ userId: req.user.id }, { $pull: { "books": { "_id": req.body } } }, { safe: true, multi: true });
+      fs.unlinkSync(rootPath + "\\dist\\" + req.user.id + "\\" + req.body._id + '.pdf');
       res.status(200).end();
     } catch (err) {
       res.status(400).end();
@@ -54,7 +55,7 @@ class BooksRoutes {
       });
       res.status(200).end();
     });
-  }// const { filePath } = book;// if (filePath) {//   const fileExists = fs.existsSync(rootPath + "\\dist\\" + req.user.id + "\\" + filePath); //must be checked or when deleted filepath properthy should be also deleted//   if (fileExists)//     fs.unlinkSync(rootPath + "\\dist\\" + req.user.id + "\\\\" + filePath);// }
+  }
 
   async downloadBook(req, res) {
     try {
@@ -71,3 +72,6 @@ export default booksRoutes;
 //na poczatku tworze folder id z nazwa uzytkownika
 //do tego folderu zapisywane sa pliki danego usera 
 // BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': bookId }, { "books.$.filePath": req.files[0].filename }); //filtered in second argument
+
+// const { filePath } = book;// if (filePath) {//   const fileExists = fs.existsSync(rootPath + "\\dist\\" + req.user.id + "\\" + filePath); //must be checked or when deleted filepath properthy should be also deleted
+// if (fileExists) //fs.unlinkSync(rootPath + "\\dist\\" + req.user.id + "\\\\" + filePath);// }

@@ -56,9 +56,11 @@
 
 0.3.8 - added first version of book dowload and upload
 
-0.3.9 - file upload fully works 
+0.3.9 - file upload fully works
 
 0.4 - downloading file fully works
+
+0.4.1 - remove files fully works
 
 TO DO:
 Book stores pathFile

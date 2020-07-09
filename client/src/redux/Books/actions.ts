@@ -128,29 +128,6 @@ export function downloadBook(bookId: string, token: string) {
   }
 }
 
-// export function downloadBook(token: string) {
-//   return (dispatch: (func: Action) => void) => {
-//     Axios.get(`${url}/download`, {
-//       headers: {
-//         Authorization: "Bearer " + token,
-//       },
-//       responseType: "blob", //{responseType: 'arraybuffer}
-//     })
-//       .then((response) => {
-//         const blob = new Blob([response.data], { type: "application/pdf" });
-//         const url = window.URL.createObjectURL(blob);
-//         window.open(url, "_blank");
-//         dispatch(success());
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
-//   function success(): Action {
-//     return { type: DOWNLOAD_BOOK };
-//   }
-// }
-
 export function uploadBook(token: string, file: any) {
   Axios.post(`${url}/upload`, file, {
     headers: {
@@ -161,16 +138,16 @@ export function uploadBook(token: string, file: any) {
     .catch((error) => {});
 }
 
-// res.sendFile(file, {headers: {'Content-Type': 'image/jpeg'}})
-
-// const link = document.createElement("a");
-// link.href = window.URL.createObjectURL(blob);
-// link.download = "Report_" + new Date() + ".pdf";
-// link.click();
-
-// var file = fs.createReadStream('./public/modules/datacollectors/output.pdf');
-// var stat = fs.statSync('./public/modules/datacollectors/output.pdf');
-// res.setHeader('Content-Length', stat.size);
-// res.setHeader('Content-Type', 'application/pdf');
-// res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
-// file.pipe(res);
+export function editBook(token: string) {
+  Axios.patch(
+    `${url}/update`,
+    {},
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  )
+    .then((response) => {})
+    .catch((error) => {});
+}
