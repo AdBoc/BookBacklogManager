@@ -62,7 +62,10 @@
 
 0.4.1 - remove files fully works
 
+0.4.2 - added small fixes and simple book edit
+
 TO DO:
 Book stores pathFile
 When confirmed password is filled and password changes it does not notice
 Token should be stored in cookies
+Add close to newBookForm

@@ -18,15 +18,14 @@ const NewBookForm: React.FC = () => {
   const submitNewBook = (e: any) => {
     e.preventDefault();
     let newBook = newBookForm;
-    newBook.status = 'On Backlog';
     newBook.dateCreated = new Date().toISOString();
     dispatch(addBook(newBook as BookStateObject, token));
     window.location.reload(); //history.go(); //TEMPORARY SOLUTION (hide submit new book and reload booklist component)
   }
 
   const handleSelect = (e: any) => {
-    const { value } = e.target;
-    setNewBookForm((prev) => ({ ...prev, type: value }));
+    const { value, name } = e.target;
+    setNewBookForm((prev) => ({ ...prev, [name]: value }));
   }
 
   return (
@@ -35,9 +34,15 @@ const NewBookForm: React.FC = () => {
       <input type="text" placeholder="author" name="author" onChange={handleChange} required />
       <input type="text" placeholder="year" name="year" onChange={handleChange} />
       <input type="text" placeholder="pages" name="pages" onChange={handleChange} />
-      <select onChange={handleSelect}>
+      <select name="status" onChange={handleSelect}>
+        <option value="OnBacklog" placeholder="On Backlog">On Backlog</option>
+        <option value="CurrentlyReading" placeholder="Currently Reading">Currently Reading</option>
+        <option value="Suspended" placeholder="Suspended">Suspended</option>
+        <option value="History" placeholder="History">History</option>
+      </select>
+      <select name="type" onChange={handleSelect}>
         <option value="Fiction" placeholder="Fiction">Fiction</option>
-        <option value="NonFiction" placeholder="NonFiction">Non Fiction</option>
+        <option value="Nonfiction" placeholder="Nonfiction">Nonfiction</option>
         <option value="Science" placeholder="Science">Science</option>
       </select>
       <input type="submit" value="Submit" />

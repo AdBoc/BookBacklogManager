@@ -6,7 +6,7 @@ export const initialBookState = {
   year: "",
   pages: "",
   type: "Fiction",
-  status: "",
+  status: "On Backlog",
   dateCreated: "",
 };
 
@@ -20,15 +20,15 @@ export const sortSelect: BookListFilters = [
 
 export const statusSelect: BookListFilters = [
   { value: "All", label: "All" },
-  { value: "On Backlog", label: "On Backlog" },
-  { value: "Currently Reading", label: "Currently Reading" },
+  { value: "OnBacklog", label: "On Backlog" },
+  { value: "CurrentlyReading", label: "Currently Reading" },
   { value: "Suspended", label: "Suspended" },
   { value: "History", label: "History" },
 ];
 
 export const typeSelect: BookListFilters = [
   { value: "All", label: "All" },
-  { value: "NonFiction", label: "NonFiction" },
+  { value: "Nonfiction", label: "Nonfiction" },
   { value: "Fiction", label: "Fiction" },
   { value: "Science", label: "Science" },
 ];

@@ -69,12 +69,12 @@ export function addBook(book: BookStateObject, token: string) {
   }
 }
 
-export function removeBook(bookID: string, token: string) {
+export function removeBook(bookId: string, token: string) {
   return (dispatch: (func: Action) => void) => {
     Axios.post(
       `${url}/delete`,
       {
-        _id: bookID,
+        _id: bookId,
       },
       {
         headers: {
@@ -138,10 +138,28 @@ export function uploadBook(token: string, file: any) {
     .catch((error) => {});
 }
 
-export function editBook(token: string) {
+export function editBook(bookId: string, token: string) {
   Axios.patch(
-    `${url}/update`,
-    {},
+    `${url}/edit`,
+    {
+      _id: bookId,
+    },
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  )
+    .then((response) => {})
+    .catch((error) => {});
+}
+
+export function removeFile(bookId: string, token: string) {
+  Axios.post(
+    `${url}/deleteFile`,
+    {
+      _id: bookId,
+    },
     {
       headers: {
         Authorization: "Bearer " + token,

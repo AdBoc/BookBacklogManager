@@ -21,9 +21,9 @@ const BookList: React.FC<IProps> = ({ sortingOptions }) => {
   useEffect(() => {
     dispatch(requestBooks(token));
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
-  const handleClick = (item: BookStateObject) => {
+  const handleClick = (item: BookStateObject) => {// argumnt of function BookStateObject | null, 
     isElementVisibile ? setBookObjectInfo(selectedBookData) : setBookObjectInfo(item); //data sent to element showing book
     setIsElementVisibile((prev) => !prev);
   }

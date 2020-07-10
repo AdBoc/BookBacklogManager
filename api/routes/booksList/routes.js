@@ -32,7 +32,8 @@ class BooksRoutes {
     }
   }
 
-  async updateBook(req, res) {
+  async updateBook(req, res) { //musze znalezc dana ksiazke po id i dopasowac jej dane
+    console.log(req.body._id);
   }
 
   async uploadBook(req, res) {
@@ -61,6 +62,16 @@ class BooksRoutes {
     try {
       res.download(path.join(rootPath, `\\dist\\${req.user.id}\\${req.body._id}.pdf`));
     } catch (err) {
+      res.status(400).end();
+    }
+  }
+
+  async deleteFile(req, res) {
+    try {
+      fs.unlinkSync(rootPath + "\\dist\\" + req.user.id + "\\" + req.body._id + '.pdf');
+      res.status(200).end();
+    } catch (err) {
+      console.log(err);
       res.status(400).end();
     }
   }
