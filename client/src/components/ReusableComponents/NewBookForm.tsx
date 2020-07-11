@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { StoreType, NewBookData } from '../../../ts/interfaces/interfaces';
-import { initialBookState } from '../initialValues';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBook } from '../../../redux/Books/actions';
-import { BookStateObject } from '../../../redux/Books/interfaces';
+import { StoreType, NewBookData } from '../../ts/interfaces/interfaces';
+import { initialBookState } from '../Backlog/initialValues';
+import { addBook } from '../../redux/Books/actions';
+import { BookStateObject } from '../../redux/Books/interfaces';
 
-const NewBookForm: React.FC = () => {
+interface IProps {
+  type: 'new' | 'edit';
+}
+
+const NewBookForm: React.FC<IProps> = () => {
   const dispatch = useDispatch();
   const token = useSelector((store: StoreType) => store.user.token);
   const [newBookForm, setNewBookForm] = useState<NewBookData>(initialBookState);
@@ -50,4 +54,4 @@ const NewBookForm: React.FC = () => {
   )
 }
 
-export default NewBookForm;
+export default NewBookForm

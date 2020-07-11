@@ -64,6 +64,8 @@
 
 0.4.2 - added small fixes and simple book edit
 
+0.4.3 - added working book edit option
+
 TO DO:
 Book stores pathFile
 When confirmed password is filled and password changes it does not notice

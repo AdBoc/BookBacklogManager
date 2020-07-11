@@ -32,8 +32,12 @@ class BooksRoutes {
     }
   }
 
-  async updateBook(req, res) { //musze znalezc dana ksiazke po id i dopasowac jej dane
-    console.log(req.body._id);
+  async updateBook(req, res) {
+    const { oldBookData, newBookData } = req.body;
+    if (newBookData)
+      Object.keys(newBookData).map((value) => { oldBookData[value] = newBookData[value] });
+    await BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': req.body.oldBookData._id }, { $set: { books: oldBookData } }).exec();    
+    res.status(200).end();
   }
 
   async uploadBook(req, res) {

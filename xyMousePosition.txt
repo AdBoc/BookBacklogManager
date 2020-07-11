@@ -72,68 +72,31 @@ UPLOAD FILE -- STORAGE
 //     encode_file = stream.toString("base64");
 //   }
 
+EDIT BOOK IN API
 
+// await BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': req.body._id }, { books: bookData }, (err, doc) => { console.log(doc) }).exec();
 
+    // await BooksList.findOne({ userId: req.user.id }).select({ books: { $elemMatch: { _id: req.body._id } } }).then((bookData) => {
+    //   //   Object.keys(req.body).map((value) => {
+    //   //     bookData.books[0][value] = req.body[value];
+    //   //   });
+    //   //   bookData.save((err) => {
+    //   //     if (err)
+    //   //       console.log(err);
+    //   //   });
+    //   if (req.body.title)
+    //     bookData.books[0].title = req.body.title;
+    //   if (req.body.author)
+    //     bookData.books[0].author = req.body.author;
+    //   bookData.save();
+    // });
+// const { title, author, year, pages, status, type } = bookData.books[0];
+  // if (req.body.title) {
+  //   title = req.body.title;
+  // }
+  // if(req.body.author) {
+  // }
 
-export const initialArray = [
-  {
-    id: "dadasadzx",
-    title: "Zbrodnia i Kara",
-    author: "Fidor Dostojewski",
-    year: "1866",
-    pages: "504",
-    type: "Fiction",
-    status: "On Backlog",
-    dateCreated: "2020-06-17T18:32:37.468Z",
-  },
-  {
-    id: "rgbd",
-    title: "Idiota",
-    author: "Fidor Dostojewski",
-    year: "1860",
-    pages: "608",
-    type: "Fiction",
-    status: "History",
-    dateCreated: "2020-06-17T18:33:69.468Z",
-  },
-  {
-    id: "kjljuhv",
-    title: "Czlowiek w poszukiwaniu sensu",
-    author: "Viktor Frankl",
-    year: "1968",
-    pages: "430",
-    type: "NonFiction",
-    status: "Currently Reading",
-    dateCreated: "2020-06-17T18:34:69.468Z",
-  },
-  {
-    id: "xcbghjf",
-    title: "1984",
-    author: "Orwell",
-    year: "1950",
-    pages: "250",
-    type: "Fiction",
-    status: "On Backlog",
-    dateCreated: "2020-06-17T18:35:37.468Z",
-  },
-  {
-    id: "wrtuyuy",
-    title: "Anna Karenina",
-    author: "Tolstoj",
-    year: "1900",
-    pages: "500",
-    type: "Fiction",
-    status: "On Backlog",
-    dateCreated: "2020-06-17T18:36:69.468Z",
-  },
-  {
-    id: "fdxZgfdhjx",
-    title: "Pułapki myślenia. O myśleniu szybkim i wolnym",
-    author: "Daniel Kahneman",
-    year: "2000",
-    pages: "2000",
-    type: "Science",
-    status: "On Backlog",
-    dateCreated: "2020-06-17T18:28:69.468Z",
-  },
-];
+  // await BooksList.findOneAndUpdate(
+  //   { userId: req.user.id, 'books._id': req.body._id },
+  //   { $set: { "books.$": { "title": req.body.title } } }).exec();

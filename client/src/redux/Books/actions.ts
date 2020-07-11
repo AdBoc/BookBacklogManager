@@ -8,6 +8,7 @@ import {
 } from "./interfaces";
 import { Action } from "./interfaces";
 import Axios from "axios";
+import { NewBookData } from "../../ts/interfaces/interfaces";
 
 const url = "http://localhost:8000/api/books";
 
@@ -138,11 +139,25 @@ export function uploadBook(token: string, file: any) {
     .catch((error) => {});
 }
 
-export function editBook(bookId: string, token: string) {
+export function editBook(
+  oldBook: BookStateObject,
+  newBookForm: NewBookData,
+  token: string
+) {
   Axios.patch(
     `${url}/edit`,
     {
-      _id: bookId,
+      oldBookData: {
+        ...oldBook,
+      },
+      newBookData: {
+        ...(newBookForm.title ? { title: newBookForm.title } : {}),
+        ...(newBookForm.author ? { author: newBookForm.author } : {}),
+        ...(newBookForm.year ? { year: newBookForm.year } : {}),
+        ...(newBookForm.pages ? { pages: newBookForm.pages } : {}),
+        ...(newBookForm.type ? { type: newBookForm.type } : {}),
+        ...(newBookForm.status ? { status: newBookForm.status } : {}),
+      },
     },
     {
       headers: {

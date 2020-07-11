@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BookStateObject } from '../../../redux/Books/interfaces';
-import { removeBook, downloadBook, uploadBook, removeFile } from '../../../redux/Books/actions';
-import { StoreType } from '../../../ts/interfaces/interfaces';
+import { removeBook, downloadBook, uploadBook, removeFile, editBook } from '../../../redux/Books/actions';
+import { StoreType, NewBookData } from '../../../ts/interfaces/interfaces';
 
 interface IProps {
   book: BookStateObject;
@@ -10,6 +10,15 @@ interface IProps {
 }
 
 const BookListElement: React.FC<IProps> = ({ book, close }) => {
+  const [newBookForm, setNewBookForm] = useState<NewBookData>({
+    title: "",
+    author: "",
+    year: "",
+    pages: "",
+    type: "",
+    status: "",
+    dateCreated: "",
+  });
   const dispatch = useDispatch();
   const token = useSelector((store: StoreType) => store.user.token);
   const [editMode, setEditMode] = useState(false);
@@ -33,27 +42,62 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
     close(book);
   };
 
-  const edit = () => {
+  const handleEditMode = () => {
     setEditMode(prev => !prev)
-    // editBook(book._id, token);
   }
 
   const deleteFile = () => {
     removeFile(book._id, token);
   }
 
+
+
+
+  //-----------------------------------------------------------------------------
+
+
+
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setNewBookForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const submitNewBook = (e: any) => {
+    e.preventDefault();
+    editBook(book, newBookForm, token);
+    // window.location.reload(); //history.go(); //TEMPORARY SOLUTION (hide submit new book and reload booklist component)
+  }
+
+  const handleSelect = (e: any) => {
+    const { value, name } = e.target;
+    setNewBookForm((prev) => ({ ...prev, [name]: value }));
+  }
+
   return (
     <>
       {editMode ?
         (
-          <>
-            <label><input type="text" placeholder={book.title} />Title</label>
-            <label><input type="text" placeholder={book.author} />Author</label>
-            <label><input type="text" placeholder={book.pages} />Pages</label>
-            <label><input type="text" placeholder={book.year} />Year</label>
-            <label><input type="text" placeholder={book.type} />Type</label>
-            <label><input type="text" placeholder={book.status} />Status</label>
-          </>
+          <form onSubmit={submitNewBook}>
+            <input type="text" placeholder={book.title} name="title" onChange={handleChange} />
+            <input type="text" placeholder={book.author} name="author" onChange={handleChange} />
+            <input type="text" placeholder={book.year} name="year" onChange={handleChange} />
+            <input type="text" placeholder={book.pages} name="pages" onChange={handleChange} />
+            <select name="status" onChange={handleSelect}>
+              <option disabled defaultValue={book.status}>{book.status}</option>
+              <option value="OnBacklog" placeholder="On Backlog">On Backlog</option>
+              <option value="CurrentlyReading" placeholder="Currently Reading">Currently Reading</option>
+              <option value="Suspended" placeholder="Suspended">Suspended</option>
+              <option value="History" placeholder="History">History</option>
+            </select>
+            <select name="type" onChange={handleSelect}>
+              <option disabled defaultValue={book.type}>{book.type}</option>
+              <option value="Fiction" placeholder="Fiction">Fiction</option>
+              <option value="Nonfiction" placeholder="Nonfiction">Nonfiction</option>
+              <option value="Science" placeholder="Science">Science</option>
+            </select>
+            <input type="submit" value="Submit" />
+          </form>
         ) : (
           <>
             <div>{book.title}</div>
@@ -66,7 +110,7 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
         )
       }
       <button onClick={download}>download</button>
-      <button onClick={edit}>edit</button>
+      <button onClick={handleEditMode}>edit</button>
       <button onClick={remove}>remove</button>
       <button onClick={closeElement}>close</button>
       <button onClick={deleteFile}>remove File</button>
@@ -76,22 +120,3 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
 }
 
 export default BookListElement;
-//edit you can click on edit button and than click on fields of component and change them.
-
-// return (
-//   <div className="login">
-//     {authStatus.isLogged ?
-//       (
-//         <Redirect to='/' />
-//       )
-//       :
-//       (
-//         <div className="login__loginForm">
-//           <p className="login__mainText">Login</p>
-//           <LoginForm handleSubmit={handleSubmit} fields={fields} validationErrors={validationErrors} handleFields={handleFields} />
-//           <p className="login__register">Not registered? <Link to={'/register'}>Create an account</Link></p>
-//         </div>
-//       )
-//     }
-//   </div >
-// )

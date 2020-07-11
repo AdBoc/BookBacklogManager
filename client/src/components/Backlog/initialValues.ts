@@ -6,7 +6,7 @@ export const initialBookState = {
   year: "",
   pages: "",
   type: "Fiction",
-  status: "On Backlog",
+  status: "OnBacklog",
   dateCreated: "",
 };
 
