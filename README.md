@@ -66,6 +66,8 @@
 
 0.4.3 - added working book edit option
 
+0.4.4 - added ability to edit book and created NewBookForm reusable component
+
 TO DO:
 Book stores pathFile
 When confirmed password is filled and password changes it does not notice

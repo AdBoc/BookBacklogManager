@@ -5,8 +5,8 @@ export const initialBookState = {
   author: "",
   year: "",
   pages: "",
-  type: "Fiction",
-  status: "OnBacklog",
+  type: "",
+  status: "",
   dateCreated: "",
 };
 

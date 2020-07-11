@@ -49,7 +49,7 @@ export interface NewBookData {
   author: string;
   year: string;
   pages: string;
-  type: string;
-  status: string;
+  type: string; //"All" | "Nonfiction" | "Fiction" | "Science" | "";
+  status: string; //"All" | "OnBacklog" | "CurrentlyReading" | "Suspended" | "History" | "";
   dateCreated: string;
 }
