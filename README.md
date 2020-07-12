@@ -68,8 +68,10 @@
 
 0.4.4 - added ability to edit book and created NewBookForm reusable component
 
+0.4.5 - books are now requested in main component in useEffect hook
+
 TO DO:
-Book stores pathFile
 When confirmed password is filled and password changes it does not notice
 Token should be stored in cookies
 Add close to newBookForm
+Better exception handling

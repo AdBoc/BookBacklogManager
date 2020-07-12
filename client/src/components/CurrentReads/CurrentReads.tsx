@@ -9,7 +9,7 @@ const CurrentReads: React.FC = () => {
   return (
     <>
       <div>Current Reads</div>
-      {bookArray ? (bookArray.filter((item: BookStateObject) => { return item.status === 'Currently Reading' }).map((item: BookStateObject) => {
+      {bookArray ? (bookArray.filter((item: BookStateObject) => { return item.status === 'CurrentlyReading' }).map((item: BookStateObject) => {
         return (
           <div key={item._id}>
             <ul className="BookList__list__item" id={item._id}>

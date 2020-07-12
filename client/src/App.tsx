@@ -16,14 +16,19 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AUTHORIZE } from './redux/User/interfaces';
 import PublicRoute from './_helpers/PublicRoute';
+import { requestBooks } from './redux/Books/actions';
 
 const App: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    token ? dispatch({ type: AUTHORIZE, payload: token, status: true })
-      : dispatch({ type: AUTHORIZE, payload: "", status: false })
+    if (token) {
+      dispatch({ type: AUTHORIZE, payload: token, status: true })
+      dispatch(requestBooks(token));
+    } else {
+      dispatch({ type: AUTHORIZE, payload: "", status: false })
+    }
     // eslint-disable-next-line
   }, [])
 
