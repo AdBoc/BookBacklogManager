@@ -8,6 +8,9 @@ export const initialBookState = {
   type: "",
   status: "",
   dateCreated: "",
+  currentReadsStatus: {
+    status: ""
+  }
 };
 
 export const sortSelect: BookListFilters = [

@@ -8,6 +8,11 @@ export interface BookStateObject {
   status: string;
   dateCreated: string;
   filePath?: string;
+  currentReadsStatus: {
+    status: boolean;
+    date?: string;
+    pages?: string;
+  }
 }
 
 export interface InitialBookState {

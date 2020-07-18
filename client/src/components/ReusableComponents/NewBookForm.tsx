@@ -27,9 +27,10 @@ const NewBookForm: React.FC<IProps> = ({ type, book }) => {
       newBook.status = "OnBacklog";
     if (!newBook.type)
       newBook.type = "Fiction";
+    newBook.currentReadsStatus.status = "false";
     newBook.dateCreated = new Date().toISOString();
-    type === 'new' ? dispatch(addBook(newBook as BookStateObject, token)) : editBook(book!, newBookForm, token);
-    window.location.reload(); //history.go(); //TEMPORARY SOLUTION (hide submit new book and reload booklist component)
+    type === 'new' ? dispatch(addBook(newBook, token)) : editBook(book!, newBookForm, token);
+    // window.location.reload(); //history.go(); //TEMPORARY SOLUTION (hide submit new book and reload booklist component)
   }
 
   const handleSelect = (e: any) => {

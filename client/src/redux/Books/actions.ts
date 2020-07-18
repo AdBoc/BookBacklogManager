@@ -23,7 +23,7 @@ export function requestBooks(token: string) {
       .then((response) => {
         dispatch(success(response.data));
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
 
   function request(): Action {
@@ -34,18 +34,13 @@ export function requestBooks(token: string) {
   }
 }
 
-export function addBook(book: BookStateObject, token: string) {
+export function addBook(book: NewBookData, token: string) {
+
   return (dispatch: (func: Action) => void) => {
     Axios.post(
       `${url}/addBook`,
       {
-        title: book.title,
-        author: book.author,
-        year: book.year,
-        pages: book.pages,
-        type: book.type,
-        status: book.status,
-        dateCreated: book.dateCreated,
+        ...book
       },
       {
         headers: {
@@ -54,9 +49,11 @@ export function addBook(book: BookStateObject, token: string) {
       }
     )
       .then((response) => {
+        console.log('book added');
         dispatch(success());
       })
       .catch((error) => {
+        console.log(error);
         dispatch(failure());
       });
   };
@@ -135,8 +132,8 @@ export function uploadBook(token: string, file: any) {
       Authorization: "Bearer " + token,
     },
   })
-    .then((response) => {})
-    .catch((error) => {});
+    .then((response) => { })
+    .catch((error) => { });
 }
 
 export function editBook(
@@ -165,8 +162,8 @@ export function editBook(
       },
     }
   )
-    .then((response) => {})
-    .catch((error) => {});
+    .then((response) => { })
+    .catch((error) => { });
 }
 
 export function removeFile(bookId: string, token: string) {
@@ -181,6 +178,65 @@ export function removeFile(bookId: string, token: string) {
       },
     }
   )
-    .then((response) => {})
-    .catch((error) => {});
+    .then((response) => { })
+    .catch((error) => {
+      console.log(error);
+    });
 }
+
+export function sendDeadline(deadline: string, bookId: string, token: string) {
+  Axios.post(
+    `${url}/setDeadline`,
+    {
+      _id: bookId,
+      deadline
+    },
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  )
+    .then((response) => { })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export function sendCurrentPage(pages: string, bookId: string, token: string) {
+  Axios.post(
+    `${url}/setCurrentPages`,
+    {
+      _id: bookId,
+      pages
+    },
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  )
+    .then((response) => { })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export function sendStatus(status: string, bookId: string, token: string) {
+  Axios.post(
+    `${url}/sendStatus`,
+    {
+      _id: bookId,
+      status
+    },
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  )
+    .then((response) => { })
+    .catch((error) => {
+      console.log(error);
+    });
+};

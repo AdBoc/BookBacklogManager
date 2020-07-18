@@ -10,7 +10,7 @@ interface BookListsFilterObject {
   label: string;
 }
 
-export interface BookListFilters extends Array<BookListsFilterObject> {}
+export interface BookListFilters extends Array<BookListsFilterObject> { }
 
 export interface SortingOptions {
   sort: string;
@@ -52,4 +52,7 @@ export interface NewBookData {
   type: string; //"All" | "Nonfiction" | "Fiction" | "Science" | "";
   status: string; //"All" | "OnBacklog" | "CurrentlyReading" | "Suspended" | "History" | "";
   dateCreated: string;
+  currentReadsStatus: {
+    status: string;
+  }
 }

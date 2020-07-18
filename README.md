@@ -70,8 +70,14 @@
 
 0.4.5 - books are now requested in main component in useEffect hook
 
+0.4.6 - fixed book update, added currentReading status in mongo model
+
+0.4.7 - added status and deadline management in currently reading tab
+
 TO DO:
 When confirmed password is filled and password changes it does not notice
 Token should be stored in cookies
 Add close to newBookForm
 Better exception handling
+Add Book rating system
+Remove powinien sprawdzac czy plik istnieje

@@ -12,7 +12,12 @@ const BooksListSchema = new Schema({
         type: { type: String },
         status: { type: String },
         dateCreated: { type: Date },
-        filePath: { type: String }
+        filePath: { type: String },
+        currentReadsStatus: {
+            status: { type: Boolean },
+            date: { type: Date },
+            pages: { type: Number }
+        }
     }]
 })
 

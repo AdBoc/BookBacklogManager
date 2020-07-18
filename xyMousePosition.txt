@@ -100,3 +100,9 @@ EDIT BOOK IN API
   // await BooksList.findOneAndUpdate(
   //   { userId: req.user.id, 'books._id': req.body._id },
   //   { $set: { "books.$": { "title": req.body.title } } }).exec();
+
+
+
+function(xy){return function(yz) { console.log('works')}}
+const handleStatus = (arg: string) => () => {};
+onClick={handleStatus('arg')}

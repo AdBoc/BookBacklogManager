@@ -8,9 +8,13 @@ const rootPath = process.cwd();
 class BooksRoutes {
   async addBook(req, res) {
     try {
-      await BooksList.findOneAndUpdate({ userId: req.user.id }, { $push: { books: req.body } });
+      let newBook = Object.assign({}, req.body);
+      newBook.currentReadsStatus = {};
+      newBook.currentReadsStatus.status = false
+      await BooksList.findOneAndUpdate({ userId: req.user.id }, { $push: { books: newBook } });
       res.status(200).end();
     } catch (err) {
+      console.log(err);
       res.status(400).end();
     }
   }
@@ -36,7 +40,7 @@ class BooksRoutes {
     const { oldBookData, newBookData } = req.body;
     if (newBookData)
       Object.keys(newBookData).map((value) => { oldBookData[value] = newBookData[value] });
-    await BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': req.body.oldBookData._id }, { $set: { books: oldBookData } }).exec();    
+    await BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': req.body.oldBookData._id }, { $set: { 'books.$': oldBookData } }).exec(); //, { safe: true, multi: true }
     res.status(200).end();
   }
 
@@ -76,6 +80,33 @@ class BooksRoutes {
       res.status(200).end();
     } catch (err) {
       console.log(err);
+      res.status(400).end();
+    }
+  }
+
+  async addPages(req, res) {
+    try {
+      await BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': req.body._id }, { $set: { 'books.$.currentReadsStatus.pages': req.body.pages } });
+      res.status(200).end();
+    } catch (err) {
+      res.status(400).end();
+    }
+  }
+
+  async setDeadline(req, res) {
+    try {
+      await BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': req.body._id }, { $set: { 'books.$.currentReadsStatus.date': req.body.deadline } });
+      res.status(200).end();
+    } catch (err) {
+      res.status(400).end();
+    }
+  }
+
+  async setStatus(req, res) {
+    try {
+      await BooksList.findOneAndUpdate({ userId: req.user.id, 'books._id': req.body._id }, { $set: { 'books.$.currentReadsStatus.status': req.body.status } });
+      res.status(200).end();
+    } catch (err) {
       res.status(400).end();
     }
   }
