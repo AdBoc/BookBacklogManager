@@ -1,13 +1,15 @@
+@import '../../../styles/scss/variables.scss';
+
 .NavBar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #afaa9a;
+  background-color: $nav--color;
+  padding: 1rem;
 
   &__item {
-    padding: 0.5rem;
     text-decoration: none;
-    color: white;
+    color: $second--font;
     font-size: 1.2rem;
 
     &:first-child {
@@ -15,14 +17,13 @@
     }
 
     &:last-child {
-      background-color: #afaa9a;
+      background-color: $nav--color;
       border: none;
     }
   }
 }
 
 .toggleButton {
-  background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -30,9 +31,8 @@
 
   &__line {
     margin: 4px;
-    color: black;
     width: 1.25rem;
     height: 2px;
-    background: black;
+    background: $second--font;
   }
 }

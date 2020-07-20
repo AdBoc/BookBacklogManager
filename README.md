@@ -74,6 +74,8 @@
 
 0.4.7 - added status and deadline management in currently reading tab
 
+0.5 - big changes were made to css, smaller changes to currentReads and Backlog
+
 TO DO:
 When confirmed password is filled and password changes it does not notice
 Token should be stored in cookies

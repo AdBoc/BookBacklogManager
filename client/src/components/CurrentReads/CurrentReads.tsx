@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { BookStateObject } from '../../redux/Books/interfaces';
 import { StoreType } from '../../ts/interfaces/interfaces';
 import { sendCurrentPage, sendDeadline, sendStatus } from '../../redux/Books/actions';
+import './CurrentReads.scss';
 
 const CurrentReads: React.FC = () => {
   const bookArray = useSelector((store: StoreType) => store.books.items);
@@ -25,7 +26,7 @@ const CurrentReads: React.FC = () => {
   };
   const handleStatus = () => {
     setCurrentBookStatus(prev => !prev); //do poprawy, wytarczy ze request nie pojdzie a na froncie sie zmieni
-    console.log((!currentBookStatus).toString());
+    // console.log((!currentBookStatus).toString());
     if (bookId && currentBookStatus !== null) sendStatus((!currentBookStatus).toString(), bookId, token);
   };
 
@@ -36,46 +37,52 @@ const CurrentReads: React.FC = () => {
   }
 
   return (
-    <>
-      <div>Current Reads</div>
+    <div className="CurrentReads">
       {bookArray ? (bookArray.filter((item: BookStateObject) => { return item.status === 'CurrentlyReading' }).map((item: BookStateObject) => {
         return (
-          <div key={item._id} onMouseEnter={() => { setBookId(item._id); setCurrentBookStatus(item.currentReadsStatus.status); }}>
-            <ul className="BookList__list__item" id={item._id}>
+          <ul className="CurrentReads__item" key={item._id} id={item._id} onMouseEnter={() => { setBookId(item._id); setCurrentBookStatus(item.currentReadsStatus.status); }} >
+            <div>
               <li>{item.title}</li>
               <li>{item.author}</li>
-              <label><input type="checkbox" onChange={handleStatus} defaultChecked={item.currentReadsStatus.status} />Set deadline</label>
-              {
-                item.currentReadsStatus.status && <>
-                  <p>current page: {item.currentReadsStatus.pages}/{item.pages}</p><button onClick={() => { setEditPages(prev => !prev) }}>edit</button>
-                  {
-                    editPages && <>
-                      <input type="number" placeholder='insert current page' onChange={(e) => setCurrentPage(e.target.value)} />
-                      <button onClick={handlePages}>Send</button>
-                    </>
-                  }
-                  <p>deadline: {item.currentReadsStatus.date} ({dateDiff(new Date(), new Date(item.currentReadsStatus.date as string))} days) </p><button onClick={() => { setEditDeadline(prev => !prev) }}>edit</button>
-                  {
-                    editDeadline && <>
-                      <input type="date" onChange={(e) => setDeadline(e.target.value)} />
-                      <button onClick={handleDeadline}>Send</button>
-                    </>
-                  }
-                </>
-              }
-            </ul>
-          </div>)
+            </div>
+            <input className="CurrentReads__checkbox" type="checkbox" onChange={handleStatus} defaultChecked={item.currentReadsStatus.status} />
+            {
+              item.currentReadsStatus.status &&
+              <div className="CurrentReads__details">
+                <div className="CurrentReads__details__group">
+                  <p className={item.currentReadsStatus.pages ? "" : "--hide"}>{item.currentReadsStatus.pages}/{item.pages}</p>
+                  <button className="CurrentReads__details__button" onClick={() => { setEditPages(prev => !prev) }}>Set Pages</button>
+                </div>
+                {
+                  editPages && <>
+                    <input type="number" placeholder='insert current page' onChange={(e) => setCurrentPage(e.target.value)} />
+                    <button onClick={handlePages}>Send</button>
+                  </>
+                }
+                <div className="CurrentReads__details__group">
+                  <p className={item.currentReadsStatus.date ? "" : "--hide"}>{item.currentReadsStatus.date} ({dateDiff(new Date(), new Date(item.currentReadsStatus.date as string))} days)</p>
+                  <button className="CurrentReads__details__button" onClick={() => { setEditDeadline(prev => !prev) }}>Set Deadline</button>
+                </div>
+                {
+                  editDeadline && <>
+                    <input type="date" onChange={(e) => setDeadline(e.target.value)} />
+                    <button className="CurrentReads__details__button" onClick={handleDeadline}>Send</button>
+                  </>
+                }
+              </div>
+            }
+          </ul>)
       })) : (
           <div>No books with currently reading status</div>
         )
       }
-    </>
+    </div>
   )
 }
 
 export default CurrentReads;
 //make special array with only currently read books to avoid sorting it every time?
 //too much data in bookList? 
-
 // user zaznacza deadline (na kiedy chce miec przeczytana dana pozycje) i moze uzupelniac obecna liczbe przezytanych stron 
 // nie mozna wybrac daty z przeszlosci, 
+//mozliwosc sortowania i przeczytania ksiazki

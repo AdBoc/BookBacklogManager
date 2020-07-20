@@ -3,7 +3,7 @@ import { useForms } from '../../hooks/useForms';
 import { FormState } from '../../ts/interfaces/interfaces';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/User/actions';
-import { Link } from 'react-router-dom';
+import './Register.scss';
 
 const Register: React.FC = (): JSX.Element => {
   const [formState, setFormState] = useState<FormState>({
@@ -43,21 +43,18 @@ const Register: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Email address</label>
-        <input type="email" name="email" onChange={handleChange} placeholder="Email" />
-        {formState.formErrors.email}
-        <label>Password</label>
-        <input type="password" name="password" onChange={handleChange} placeholder="Password" />
-        {formState.formErrors.password}
-        <label>Confirm Password</label>
-        <input type="password" name="confirmPassword" onChange={handleChange} placeholder="Confirm password" />
-        {formState.formErrors.confirmPassword}
-        <button type="submit">Submit</button>
-      </form>
-      <Link to="/login">Login</Link>
-    </div>
+    <form className="Register" onSubmit={handleSubmit}>
+      <label className="Register__label">Email address</label>
+      <input className="Register__input" type="email" name="email" onChange={handleChange} placeholder="Email" />
+      {formState.formErrors.email}
+      <label className="Register__label">Password</label>
+      <input className="Register__input" type="password" name="password" onChange={handleChange} placeholder="Password" />
+      {formState.formErrors.password}
+      <label className="Register__label">Confirm Password</label>
+      <input className="Register__input" type="password" name="confirmPassword" onChange={handleChange} placeholder="Confirm password" />
+      {formState.formErrors.confirmPassword}
+      <button className="Register__button" type="submit">Submit</button>
+    </form>
   )
 }
 

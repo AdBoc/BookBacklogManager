@@ -12,9 +12,10 @@ const Customization: React.FC = (): JSX.Element => {
 
   return (
     <div className={theme === "light" ? "customization light-mode" : "customization dark-mode"}>
-      <div>Customization</div>
-      <div>Current Theme: {theme}</div>
-      <button onClick={changeTheme}>Dark Mode</button>
+      <div>User Customization</div>
+      {/* <div>Current Theme: {theme}</div> */}
+      <button className="customization__themeButton" onClick={changeTheme}>Change Theme</button>
+      <button className="customization__themeButton--red" onClick={changeTheme}>Delete Account</button>
     </div >
   )
 }

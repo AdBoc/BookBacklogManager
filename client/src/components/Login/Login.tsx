@@ -4,6 +4,7 @@ import { FormState } from '../../ts/interfaces/interfaces';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/User/actions';
 import { Link } from 'react-router-dom';
+import './Login.scss'
 
 const Login: React.FC = (): JSX.Element => {
   const [formState, setFormState] = useState<FormState>({
@@ -40,18 +41,18 @@ const Login: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Email address</label>
-        <input type="email" name="email" onChange={handleChange} placeholder="Email" />
+    <>
+      <form className="Login" onSubmit={handleSubmit}>
+        <label className="Login__label">Email address</label>
+        <input className="Login__input" type="email" name="email" onChange={handleChange} placeholder="Email" />
         {formState.formErrors.email}
-        <label>Password</label>
-        <input type="password" name="password" onChange={handleChange} placeholder="Password" />
+        <label className="Login__label">Password</label>
+        <input className="Login__input" type="password" name="password" onChange={handleChange} placeholder="Password" />
         {formState.formErrors.password}
-        <button type="submit">Submit</button>
+        <button className="Login__button" type="submit">Submit</button>
       </form>
-      <Link to="/register">Create Account</Link>
-    </div>
+      <p className="Login__createAccount">No Account?<Link className="Login__createAccount__link" to="/register">Sign up</Link></p>
+    </>
   )
 }
 

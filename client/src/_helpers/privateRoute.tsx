@@ -3,7 +3,6 @@ import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { StoreType } from '../ts/interfaces/interfaces';
 
-
 interface IProps extends RouteProps {
   component: React.ComponentType<any>;
   exact?: boolean;

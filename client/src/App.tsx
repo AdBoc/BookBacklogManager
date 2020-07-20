@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { history } from './_helpers/history';
 
-import MainPage from './components/MainPage/MainPage';
+import Home from './components/Home';
 import NavBar from './components/NavBar/NavBar';
 import Backlog from './components/Backlog/Backlog';
 import CurrentReads from './components/CurrentReads/CurrentReads';
@@ -36,7 +36,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <NavBar />
       <Switch>
-        <Route exact path='/' component={MainPage} />
+        <Route exact path='/' component={Home} />
         <PrivateRoute exact path='/backlog' component={Backlog} />
         <PrivateRoute exact path='/currentReads' component={CurrentReads} />
         <PrivateRoute exact path='/customization' component={Customization} />

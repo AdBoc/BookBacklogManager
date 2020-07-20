@@ -15,7 +15,7 @@ const Select: React.FC<IProps> = ({ options, setValue, name }) => {
   }
 
   return (
-    <>
+    <div className="select">
       <p>{name}</p>
       <select onChange={handleChange}>
         {options.map((item, index) => {
@@ -24,7 +24,7 @@ const Select: React.FC<IProps> = ({ options, setValue, name }) => {
           )
         })}
       </select>
-    </>
+    </div>
   )
 }
 

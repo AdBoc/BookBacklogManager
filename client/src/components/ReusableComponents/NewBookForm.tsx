@@ -4,13 +4,15 @@ import { StoreType, NewBookData } from '../../ts/interfaces/interfaces';
 import { initialBookState } from '../Backlog/initialValues';
 import { addBook, editBook } from '../../redux/Books/actions';
 import { BookStateObject } from '../../redux/Books/interfaces';
+import './styles.scss';
 
 interface IProps {
   type: 'new' | 'edit';
+  setDisplayStatus: React.Dispatch<React.SetStateAction<boolean>>;
   book?: BookStateObject;
 }
 
-const NewBookForm: React.FC<IProps> = ({ type, book }) => {
+const NewBookForm: React.FC<IProps> = ({ type, book, setDisplayStatus }) => {
   const dispatch = useDispatch();
   const token = useSelector((store: StoreType) => store.user.token);
   const [newBookForm, setNewBookForm] = useState<NewBookData>(initialBookState);
@@ -29,8 +31,7 @@ const NewBookForm: React.FC<IProps> = ({ type, book }) => {
       newBook.type = "Fiction";
     newBook.currentReadsStatus.status = "false";
     newBook.dateCreated = new Date().toISOString();
-    type === 'new' ? dispatch(addBook(newBook, token)) : editBook(book!, newBookForm, token);
-    // window.location.reload(); //history.go(); //TEMPORARY SOLUTION (hide submit new book and reload booklist component)
+    type === 'new' ? dispatch(addBook(newBook, token)) : editBook(book!, newBookForm, token); // window.location.reload(); //history.go(); //TEMPORARY SOLUTION (hide submit new book and reload booklist component)
   }
 
   const handleSelect = (e: any) => {
@@ -42,24 +43,28 @@ const NewBookForm: React.FC<IProps> = ({ type, book }) => {
     <div>
       {type === 'new' ?
         (
-          <form onSubmit={submitNewBook}>
-            <input type="text" placeholder="title" name="title" onChange={handleChange} required />
-            <input type="text" placeholder="author" name="author" onChange={handleChange} required />
-            <input type="text" placeholder="year" name="year" onChange={handleChange} />
-            <input type="text" placeholder="pages" name="pages" onChange={handleChange} />
-            <select name="status" onChange={handleSelect}>
-              <option value="OnBacklog" placeholder="On Backlog">On Backlog</option>
-              <option value="CurrentlyReading" placeholder="Currently Reading">Currently Reading</option>
-              <option value="Suspended" placeholder="Suspended">Suspended</option>
-              <option value="History" placeholder="History">History</option>
-            </select>
-            <select name="type" onChange={handleSelect}>
-              <option value="Fiction" placeholder="Fiction">Fiction</option>
-              <option value="Nonfiction" placeholder="Nonfiction">Nonfiction</option>
-              <option value="Science" placeholder="Science">Science</option>
-            </select>
-            <input type="submit" value="Submit" />
-          </form>
+          <div className="display">
+            {/* <div className="hide" onClick={() => { setDisplayStatus(prev => !prev) }}></div> */}
+            <p>Add New Book</p>
+            <form className="newBookForm" onSubmit={submitNewBook}>
+              <input className="newBookForm__input" type="text" placeholder="title" name="title" onChange={handleChange} required />
+              <input className="newBookForm__input" type="text" placeholder="author" name="author" onChange={handleChange} required />
+              <input className="newBookForm__input" type="text" placeholder="year" name="year" onChange={handleChange} />
+              <input className="newBookForm__input" type="text" placeholder="pages" name="pages" onChange={handleChange} />
+              <select className="newBookForm__input" name="status" onChange={handleSelect}>
+                <option value="OnBacklog" placeholder="On Backlog">On Backlog</option>
+                <option value="CurrentlyReading" placeholder="Currently Reading">Currently Reading</option>
+                <option value="Suspended" placeholder="Suspended">Suspended</option>
+                <option value="History" placeholder="History">History</option>
+              </select>
+              <select className="newBookForm__input" name="type" onChange={handleSelect}>
+                <option value="Fiction" placeholder="Fiction">Fiction</option>
+                <option value="Nonfiction" placeholder="Nonfiction">Nonfiction</option>
+                <option value="Science" placeholder="Science">Science</option>
+              </select>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
         ) : (
           <form onSubmit={submitNewBook} >
             <input type="text" placeholder={book!.title} name="title" onChange={handleChange} />

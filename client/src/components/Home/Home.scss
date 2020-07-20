@@ -1,0 +1,21 @@
+@import "../../styles/scss/variables.scss";
+
+p, div, li, a {
+  color: $main--font;
+}
+
+.Home {
+  text-align: center;
+  &__frontText {
+    font-size: 1.5rem;
+    margin: 2rem;
+  }
+  &__link {
+    display: block;
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 1px solid black;
+    background-color: $secondary--color;
+    color: $second--font;
+  }
+}

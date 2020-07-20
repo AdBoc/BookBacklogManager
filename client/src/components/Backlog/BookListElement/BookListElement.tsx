@@ -46,7 +46,7 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
     <>
       {editMode ?
         (
-          <NewBookForm type='edit' book={book} />
+          <NewBookForm type='edit' book={book} setDisplayStatus={setEditMode} />
         ) : (
           <>
             <div>{book.title}</div>

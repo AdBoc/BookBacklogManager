@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './TopBar.scss';
 
 interface Props {
-  handleMenu: () => void // handleMenu(e: React.SyntheticEvent): void;
+  handleMenu: () => void
 }
 
 const TopBar: React.FC<Props> = ({ handleMenu }): JSX.Element => {

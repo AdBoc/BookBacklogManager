@@ -1,26 +1,27 @@
+@import '../../styles/scss/variables.scss';
+@import '../../styles/scss/mixins.scss';
+
 .BookList {
   text-align: center;
-  background-color: rgb(216, 216, 216);
   padding: 1rem;
-  &__title {
-    font-size: 1.25rem;
-    margin: 0 0 1rem 0;
+  max-width: 30rem;
+  margin: auto;
+  &__sortingOptions {
+    border: solid 1px $primary--border--color;
+    padding: 0.5rem;
+    .select{ 
+      display: inline-block;
+    }
   }
-  //   &__label {
-  //   }
-  //   &__sortBy {
-  //   }
   &__list {
-    margin: 1rem auto;
-    padding: 1rem;
-    max-width: 30rem;
     max-height: 20rem;
     overflow-y: auto;
 
     &__item {
-      margin: 1rem;
-      padding: 1rem;
-      border: 1px solid black;
+      padding: .5rem;
+      border-bottom: 1px solid $primary--border--color;
+      border-left: 1px solid $primary--border--color;
+      border-right: 1px solid $primary--border--color;
     }
     &__details {
       width: 100vw;
@@ -29,15 +30,14 @@
       left: 0;
       z-index: 5;
       position: fixed;
-      background-color: rgb(216, 216, 216);
     }
   }
-  //   &__button {
-  //   }
-  //   &__form {
-  //     &__input {
-  //     }
-  //     &__submit {
-  //     }
-  //   }
+  &__bookAmount {
+    font-size: 0.8rem;
+    text-align: end;
+  }
+  &__button {
+    @include button;
+    margin-top: 0.75rem;
+  }
 }

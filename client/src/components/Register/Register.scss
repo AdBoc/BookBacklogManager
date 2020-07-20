@@ -1,0 +1,16 @@
+@import "../../styles/scss/variables.scss";
+@import "../../styles/scss/mixins.scss";
+@import "../Login/Login.scss";
+
+.Register {
+    @extend .Login;
+    &__label {
+        @extend .Login__label;
+    }
+    &__input {
+        @extend .Login__input;
+    }
+    &__button {
+        @extend .Login__button;
+    }
+}

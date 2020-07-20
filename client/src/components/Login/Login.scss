@@ -1,0 +1,29 @@
+@import "../../styles/scss/mixins.scss";
+@import "../../styles/scss/variables.scss";
+
+.Login {
+    border: 1px solid black;
+    padding: 1rem;
+    margin: 1rem 1rem;
+    text-align: center;
+    &__label {
+        display: block;
+    }
+    &__input {
+        margin: 0.5rem;
+        padding: 0.25rem;
+        min-width: 12.5rem;
+    }
+    &__button {
+        @include button;
+        margin-top: 0.5rem;
+    }
+    &__createAccount {
+        text-align: center;
+        margin-top: 1rem;
+        &__link {
+            margin-left: 0.25rem;
+            color: blue;
+        }
+    }
+}
