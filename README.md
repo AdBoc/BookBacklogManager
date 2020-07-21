@@ -76,10 +76,19 @@
 
 0.5 - big changes were made to css, smaller changes to currentReads and Backlog
 
+0.5.1 - mode universal vaerification is being implemented
+
 TO DO:
-When confirmed password is filled and password changes it does not notice
-Token should be stored in cookies
-Add close to newBookForm
-Better exception handling
-Add Book rating system
-Remove powinien sprawdzac czy plik istnieje
+1 Validation
+2 Token should be stored in cookies
+- Expire after 30 days
+3 Way to get out of forms
+4 Media queries for other devices and screens
+5 Full implementation of Redux
+6 Add full Dark Theme support
+- Theme should be stored in storage/cookie
+7 Small fixes and exception handling
+8 Async and aborting requests
+9 Backend validation
+<!-- Add Book rating system -->
+<!-- Remove powinien sprawdzac czy plik istnieje -->

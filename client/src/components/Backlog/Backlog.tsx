@@ -24,7 +24,7 @@ const BooksList: React.FC = (): JSX.Element => {
         <Select name="type" options={typeSelect} setValue={setSortingOptions} />
       </div>
       <BookList sortingOptions={sortingOptions} />
-      {arrayLength !== 0 && <p className="BookList__bookAmount">Total number of books {arrayLength}</p>}
+      {arrayLength !== 0 && <p className="BookList__bookAmount">Total number of books: {arrayLength}</p>}
       <button className="BookList__button" onClick={handleNewBook}>Add new book</button>
       {addBook && <NewBookForm type='new' setDisplayStatus={setAddBook} />}
     </div>
