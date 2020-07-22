@@ -78,17 +78,21 @@
 
 0.5.1 - mode universal vaerification is being implemented
 
+0.5.2 - small fixes were made to verification 
+
 TO DO:
-1 Validation
-2 Token should be stored in cookies
+1 Token should be stored in cookies, improve css
 - Expire after 30 days
-3 Way to get out of forms
-4 Media queries for other devices and screens
-5 Full implementation of Redux
-6 Add full Dark Theme support
+2 Way to get out of forms
+3 Media queries for other devices and screens
+4 Full implementation of Redux
+5 Add full Dark Theme support
 - Theme should be stored in storage/cookie
-7 Small fixes and exception handling
-8 Async and aborting requests
-9 Backend validation
+6 Small fixes and exception handling
+7 Async and aborting requests
+8 Backend validation
+9 Animations
+10 Optimizing
 <!-- Add Book rating system -->
 <!-- Remove powinien sprawdzac czy plik istnieje -->
+<!-- After login page must refresh/or useeffect with redux login change -->

@@ -47,3 +47,20 @@
         }
     }
 }
+
+@mixin input {
+    margin: 0.25rem;
+    padding: 0.25rem;
+    min-width: 12.5rem;
+    border-radius: 5px;
+    &--error {
+        border: solid 2px $font--error;
+        background-color: rgba(255, 182, 182, 0.425);
+    }
+}
+
+@mixin error {
+    font-size: 0.8rem;
+    color: $font--error;
+    margin: 0.3rem;
+}

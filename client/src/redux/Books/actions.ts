@@ -35,7 +35,6 @@ export function requestBooks(token: string) {
 }
 
 export function addBook(book: NewBookData, token: string) {
-
   return (dispatch: (func: Action) => void) => {
     Axios.post(
       `${url}/addBook`,

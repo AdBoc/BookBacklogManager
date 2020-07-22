@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreType, NewBookData } from '../../ts/interfaces/interfaces';
-import { initialBookState } from '../Backlog/initialValues';
 import { addBook, editBook } from '../../redux/Books/actions';
 import { BookStateObject } from '../../redux/Books/interfaces';
+import { useFormValidation } from '../../hooks/FormValidation';
 import './styles.scss';
 
 interface IProps {
@@ -13,83 +13,80 @@ interface IProps {
 }
 
 const NewBookForm: React.FC<IProps> = ({ type, book, setDisplayStatus }) => {
+  const newBookForm = {
+    title: "",
+    author: "",
+    year: "",
+    pages: "",
+    type: "Fiction",
+    status: "onBacklog"
+  };
+
   const dispatch = useDispatch();
   const token = useSelector((store: StoreType) => store.user.token);
-  const [newBookForm, setNewBookForm] = useState<NewBookData>(initialBookState);
+  const { handleChange, handleSelect, submitValidity, data } = useFormValidation(newBookForm);
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setNewBookForm((prev) => ({ ...prev, [name]: value }));
-  }
-
-  const submitNewBook = (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    let newBook = newBookForm;
-    if (!newBook.status)
-      newBook.status = "OnBacklog";
-    if (!newBook.type)
-      newBook.type = "Fiction";
-    newBook.currentReadsStatus.status = "false";
-    newBook.dateCreated = new Date().toISOString();
-    type === 'new' ? dispatch(addBook(newBook, token)) : editBook(book!, newBookForm, token); // window.location.reload(); //history.go(); //TEMPORARY SOLUTION (hide submit new book and reload booklist component)
-  }
-
-  const handleSelect = (e: any) => {
-    const { value, name } = e.target;
-    setNewBookForm((prev) => ({ ...prev, [name]: value }));
-  }
+    if (submitValidity()) {
+      let newBook: NewBookData = data.formValues;
+      newBook.currentReadsStatus = { status: "false" };
+      newBook.dateCreated = new Date().toISOString();
+      type === 'new' ? dispatch(addBook(newBook, token)) : editBook(book!, newBook, token);
+      console.log('submitting');
+    }
+  };
 
   return (
-    <div>
-      {type === 'new' ?
-        (
-          <div className="display">
-            {/* <div className="hide" onClick={() => { setDisplayStatus(prev => !prev) }}></div> */}
-            <p>Add New Book</p>
-            <form className="newBookForm" onSubmit={submitNewBook}>
-              <input className="newBookForm__input" type="text" placeholder="title" name="title" onChange={handleChange} required />
-              <input className="newBookForm__input" type="text" placeholder="author" name="author" onChange={handleChange} required />
-              <input className="newBookForm__input" type="text" placeholder="year" name="year" onChange={handleChange} />
-              <input className="newBookForm__input" type="text" placeholder="pages" name="pages" onChange={handleChange} />
-              <select className="newBookForm__input" name="status" onChange={handleSelect}>
-                <option value="OnBacklog" placeholder="On Backlog">On Backlog</option>
-                <option value="CurrentlyReading" placeholder="Currently Reading">Currently Reading</option>
-                <option value="Suspended" placeholder="Suspended">Suspended</option>
-                <option value="History" placeholder="History">History</option>
-              </select>
-              <select className="newBookForm__input" name="type" onChange={handleSelect}>
-                <option value="Fiction" placeholder="Fiction">Fiction</option>
-                <option value="Nonfiction" placeholder="Nonfiction">Nonfiction</option>
-                <option value="Science" placeholder="Science">Science</option>
-              </select>
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
-        ) : (
-          <form onSubmit={submitNewBook} >
-            <input type="text" placeholder={book!.title} name="title" onChange={handleChange} />
-            <input type="text" placeholder={book!.author} name="author" onChange={handleChange} />
-            <input type="text" placeholder={book!.year} name="year" onChange={handleChange} />
-            <input type="text" placeholder={book!.pages} name="pages" onChange={handleChange} />
-            <select name="status" onChange={handleSelect}>
-              <option disabled defaultValue={book!.status}>{book!.status}</option>
-              <option value="OnBacklog" placeholder="On Backlog">On Backlog</option>
-              <option value="CurrentlyReading" placeholder="Currently Reading">Currently Reading</option>
-              <option value="Suspended" placeholder="Suspended">Suspended</option>
-              <option value="History" placeholder="History">History</option>
-            </select>
-            <select name="type" onChange={handleSelect}>
-              <option disabled defaultValue={book!.type}>{book!.type}</option>
-              <option value="Fiction" placeholder="Fiction">Fiction</option>
-              <option value="Nonfiction" placeholder="Nonfiction">Nonfiction</option>
-              <option value="Science" placeholder="Science">Science</option>
-            </select>
-            <input type="submit" value="Submit" />
-          </form >
-        )
-      }
+    <div className="">
+      {/* <div className="hide" onClick={() => {  Status(prev => !prev) }}></div> */}
+      <form className="newBookForm" onSubmit={handleSubmit}>
+        <input
+          className={data.formErrors.title ? "newBookForm__input--error" : "newBookForm__input"}
+          type="text"
+          placeholder={type === 'new' ? "book" : book?.title}
+          name="title"
+          onChange={handleChange}
+        />
+        {data.formErrors.title && <p className="error">{data.formErrors.title}</p>}
+        <input
+          className={data.formErrors.author ? "newBookForm__input--error" : "newBookForm__input"}
+          type="text"
+          placeholder={type === 'new' ? "author" : book?.author}
+          name="author"
+          onChange={handleChange}
+        />
+        {data.formErrors.author && <p className="error">{data.formErrors.author}</p>}
+        <input
+          className={data.formErrors.year ? "newBookForm__input--error" : "newBookForm__input"}
+          type="number"
+          placeholder={type === 'new' ? "year" : book?.year}
+          name="year"
+          onChange={handleChange}
+        />
+        {data.formErrors.year && <p className="error">{data.formErrors.year}</p>}
+        <input
+          className={data.formErrors.pages ? "newBookForm__input--error" : "newBookForm__input"}
+          placeholder={type === 'new' ? "pages" : book?.pages}
+          name="pages"
+          onChange={handleChange}
+        />
+        {data.formErrors.pages && <p className="error">{data.formErrors.pages}</p>}
+        <select className="newBookForm__input" name="status" value={type === 'edit' ? book?.status : data.formValues.status} onChange={handleSelect}>
+          <option value="OnBacklog" placeholder="On Backlog">On Backlog</option>
+          <option value="CurrentlyReading" placeholder="Currently Reading">Currently Reading</option>
+          <option value="Suspended" placeholder="Suspended">Suspended</option>
+          <option value="History" placeholder="History">History</option>
+        </select>
+        <select className="newBookForm__input" name="type" value={type === 'edit' ? book?.type : data.formValues.type} onChange={handleSelect}>
+          <option value="Fiction" placeholder="Fiction">Fiction</option>
+          <option value="Nonfiction" placeholder="Nonfiction">Nonfiction</option>
+          <option value="Science" placeholder="Science">Science</option>
+        </select>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
   )
 }
 
-export default NewBookForm
+export default NewBookForm;

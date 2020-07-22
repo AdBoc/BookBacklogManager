@@ -14,3 +14,7 @@
         @extend .Login__button;
     }
 }
+
+.error {
+    @include error;
+}

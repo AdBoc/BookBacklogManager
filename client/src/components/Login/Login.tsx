@@ -1,33 +1,43 @@
-import React, { useState } from 'react';
-// import { useFormValidation } from '../../hooks/FormValidation';
-// import { FormState } from '../../ts/interfaces/interfaces';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { login } from '../../redux/User/actions';
 import { Link } from 'react-router-dom';
-import './Login.scss'
 import { useFormValidation } from '../../hooks/FormValidation';
-
-interface CredentialsForm {
-  email: string;
-  password: string;
-} //ewentualnie zrobic credentials wartosc error ktora jest setowana w hooku
+import { useDispatch } from 'react-redux';
 
 const Login: React.FC = (): JSX.Element => {
-  const [credentials, setCredentials] = useState<CredentialsForm>({
+  const credentials = {
     email: "",
     password: ""
-  });
-  const { handleChange, handleSubmit } = useFormValidation(credentials, setCredentials, login);
+  };
+  const dispatch = useDispatch();
+  const { handleChange, submitValidity, data } = useFormValidation(credentials);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (submitValidity()) dispatch(login(data.formValues.email, data.formValues.password));
+  };
 
   return (
     <>
       <form className="Login" onSubmit={handleSubmit}>
         <label className="Login__label">Email address</label>
-        <input className="Login__input" type="email" name="email" onChange={handleChange} placeholder="Email" />
-        {/* {formState.formErrors.email} */}
+        <input
+          className={"Login__input " + (data.formErrors.email ? "Login__input--error" : "")}
+          type="email"
+          name="email"
+          onChange={handleChange}
+          placeholder="Email"
+        />
+        {data.formErrors.email && <p className="error">{data.formErrors.email}</p>}
         <label className="Login__label">Password</label>
-        <input className="Login__input" type="password" name="password" onChange={handleChange} placeholder="Password" />
-        {/* {formState.formErrors.password} */}
+        <input
+          className={"Login__input " + (data.formErrors.password ? "Login__input--error" : "")}
+          type="password"
+          name="password"
+          onChange={handleChange}
+          placeholder="Password"
+        />
+        {data.formErrors.password && <p className="error">{data.formErrors.password}</p>}
         <button className="Login__button" type="submit">Submit</button>
       </form>
       <p className="Login__createAccount">No Account?<Link className="Login__createAccount__link" to="/register">Sign up</Link></p>
@@ -35,5 +45,4 @@ const Login: React.FC = (): JSX.Element => {
   )
 }
 
-export default Login;
-//walidacja po name danego jsx taga (np. input name="password" jest validowane jak password)
+export default Login; //walidacja po name danego jsx taga (np. input name="password" jest validowane jak password)

@@ -1,4 +1,5 @@
 @import "../../styles/scss/variables.scss";
+@import "../../styles/scss/mixins.scss";
 
 .display {
     height: 100vh;
@@ -20,4 +21,8 @@
         padding: 0.5rem;
         width: 80%;
     }
+}
+
+.error {
+    @include error;
 }

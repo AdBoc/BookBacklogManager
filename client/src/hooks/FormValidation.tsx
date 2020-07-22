@@ -1,73 +1,106 @@
-import { act } from "react-dom/test-utils";
+import { useState } from 'react';
 
-export const useFormValidation = (data: any, setData: any, action: any) => {
+export const useFormValidation = (initialData: any) => {
   const formObject = {
     formValues: {
-      ...data
+      ...initialData
     },
     formErrors: {
-      ...data
+      ...initialData
     },
     formValidity: {
-      ...data
+      ...initialData
     }
   };
   Object.keys(formObject.formErrors).forEach(function (item) {
     formObject.formErrors[item] = "";
   });
   Object.keys(formObject.formValidity).forEach(function (item) {
-    formObject.formValidity[item] = false;
+    formObject.formValidity[item] === "" ? formObject.formValidity[item] = false : formObject.formValidity[item] = true;
   });
+
+  const [data, setData] = useState(formObject);
 
   const handleChange = ({ target }: any) => {
     const { name, value } = target;
-    setData((prev: any) => ({ ...prev, [name]: value }));
+    const { formValues } = data;
+    formValues[name] = value;
+    setData(prev => ({ ...prev, formValues }));
     handleValidation(target);
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const { formValues, formValidity } = formObject;
-    if (Object.values(formValidity).every(Boolean)) {
-      action(...data)
-    } else {
-      console.log('error');
-      for (let key in formValues) {
-        let target = {
-          name: key,
-          value: formValues[key]
-        };
-        handleValidation(target);
-      };
-    }
+  const handleSelect = ({ target }: any) => {
+    const { name, value } = target;
+    const { formValues } = data;
+    formValues[name] = value;
+    setData(prev => ({ ...prev, formValues }));
   };
 
-  const handleValidation = (target: any) => {
-    const { name, value } = target;
-    const { formErrors, formValidity } = formObject;
-    const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    //zrob switch case do tego
+  const submitValidity = () => {
+    const { formValues, formValidity } = data;
+    for (let key in formValues) {
+      let target = {
+        name: key,
+        value: formValues[key]
+      };
+      handleValidation(target);
+    };
+    if (Object.values(formValidity).every(Boolean))
+      return 1;
+    return 0;
+  };
 
-    const isEmail = name === "email"; //jesli name === email jest true to isEmail jest true
-    const isPassword = name === "password";
-    const isConfirmPassword = name === "password";
+  const handleValidation = (target: { name: string, value: string }) => {
+    const { name, value } = target;
+    const formValidity = data.formValidity;
+    const formErrors = data.formErrors;
 
     formValidity[name] = value.length > 0;
     formErrors[name] = formValidity[name] //property formErrors jest rowne stringowi, ktory zalezy od tego czy ternary expression jest false czy true
       ? ""
       : `${name} is required and cannot be empty`;
-  }; //tu setFormState
+    switch (name) {
+      case 'email':
+        formValidity[name] = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(value);
+        formErrors[name] = formValidity[name]
+          ? ""
+          : `${name} is not valid`;
+        break;
+      case 'password':
+        formValidity[name] = value.length >= 6;
+        formErrors[name] = formValidity[name]
+          ? ""
+          : `${name} should be at least 6 characters`;
+        break;
+      case 'confirmPassword':
+        formValidity[name] = value === data.formValues.password;
+        formErrors[name] = formValidity[name]
+          ? ""
+          : "passwords must be the same";
+        break;
+      // case "title":
+      // case "author":
+      //   formValidity[name] = value.length >= 1;
+      //   formErrors[name] = formValidity[name]
+      //     ? ""
+      //     : `${name} field cannot be empty`;
+      //   break;
+      default:
+        formValidity[name] = true;
+        formErrors[name] = "";
+    }
+
+    setData({
+      ...data,
+      formErrors,
+      formValidity
+    });
+  };
 
   return {
     handleChange,
-    handleSubmit
+    handleSelect,
+    submitValidity,
+    data
   };
 };
-
-
-//moze returnowac obiekt z bledami??
-//- latwo tworzyc akcje
-//- musze pisac handlery dla kazdego komponentu (handlesubmit, handlechange)
-//moge dodac errors do state oryginalnego (duzo powtarzalnego kodu)
-//moge uzyc useState w hooku
-//- jesli przesylam obiekt przez spread syntax to musze zmienic akcje na spread syntax

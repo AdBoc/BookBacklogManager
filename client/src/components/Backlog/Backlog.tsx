@@ -4,8 +4,8 @@ import Select from '../ReusableComponents/Select';
 import { sortSelect, statusSelect, typeSelect } from './initialValues';
 import BookList from './BooksList/BookList';
 import { useSelector } from 'react-redux';
-import './Backlog.scss';
 import NewBookForm from '../ReusableComponents/NewBookForm';
+import './Backlog.scss';
 
 const BooksList: React.FC = (): JSX.Element => {
   const arrayLength = useSelector((store: StoreType) => store.books.items.length);

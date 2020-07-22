@@ -1,61 +1,54 @@
-import React, { useState } from 'react'
-// import { useFormValidation } from '../../hooks/FormValidation';
-import { FormState } from '../../ts/interfaces/interfaces';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/User/actions';
+import { useFormValidation } from '../../hooks/FormValidation';
 import './Register.scss';
 
 const Register: React.FC = (): JSX.Element => {
-  // const [formState, setFormState] = useState<FormState>({
-  //   formValues: {
-  //     email: "",
-  //     password: "",
-  //     confirmPassword: ""
-  //   },
-  //   formErrors: {
-  //     email: "",
-  //     password: "",
-  //     confirmPassword: ""
-  //   },
-  //   formValidity: {
-  //     email: false,
-  //     password: false,
-  //     confirmPassword: false
-  //   }
-  // });
-  // const { handleChange, handleValidation } = useFormValidation(formState, setFormState);
-  // const dispatch = useDispatch();
+  const credentials = {
+    email: "",
+    password: "",
+    confirmPassword: ""
+  };
 
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault();
-  //   const { formValues, formValidity } = formState;
-  //   if (Object.values(formValidity).every(Boolean)) {
-  //     dispatch(register(formValues.email, formValues.password));
-  //   } else {
-  //     for (let key in formValues) {
-  //       let target = {
-  //         name: key,
-  //         value: formValues[key]
-  //       };
-  //       handleValidation(target);
-  //     }
-  //   }
-  // };
+  const dispatch = useDispatch();
+  const { handleChange, submitValidity, data } = useFormValidation(credentials);
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (submitValidity()) dispatch(register(data.formValues.email, data.formValues.password));
+  }
 
   return (
-    <></>
-    // <form className="Register" onSubmit={handleSubmit}>
-    //   <label className="Register__label">Email address</label>
-    //   <input className="Register__input" type="email" name="email" onChange={handleChange} placeholder="Email" />
-    //   {formState.formErrors.email}
-    //   <label className="Register__label">Password</label>
-    //   <input className="Register__input" type="password" name="password" onChange={handleChange} placeholder="Password" />
-    //   {formState.formErrors.password}
-    //   <label className="Register__label">Confirm Password</label>
-    //   <input className="Register__input" type="password" name="confirmPassword" onChange={handleChange} placeholder="Confirm password" />
-    //   {formState.formErrors.confirmPassword}
-    //   <button className="Register__button" type="submit">Submit</button>
-    // </form>
+    <form className="Register" onSubmit={handleSubmit}>
+      <label className="Register__label">Email address</label>
+      <input
+        className="Register__input"
+        type="email"
+        name="email"
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      {data.formErrors.email && <p className="error">{data.formErrors.email}</p>}
+      <label className="Register__label">Password</label>
+      <input
+        className={data.formErrors.password ? "Register__input--error" : "Register__input"}
+        type="password"
+        name="password"
+        onChange={handleChange}
+        placeholder="Password"
+      />
+      {data.formErrors.password && <p className="error">{data.formErrors.password}</p>}
+      <label className="Register__label">Confirm Password</label>
+      <input
+        className={data.formErrors.confirmPassword ? "Register__input--error" : "Register__input"}
+        type="password"
+        name="confirmPassword"
+        onChange={handleChange}
+        placeholder="Confirm password"
+      />
+      {data.formErrors.confirmPassword && <p className="error">{data.formErrors.confirmPassword}</p>}
+      <button className="Register__button" type="submit">Submit</button>
+    </form>
   )
 }
 

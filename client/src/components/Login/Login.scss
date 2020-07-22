@@ -6,13 +6,14 @@
     padding: 1rem;
     margin: 1rem 1rem;
     text-align: center;
+    font-size: 1.2rem;
+    border-radius: 5px;
     &__label {
+        margin: 0.25rem;
         display: block;
     }
     &__input {
-        margin: 0.5rem;
-        padding: 0.25rem;
-        min-width: 12.5rem;
+        @include input;
     }
     &__button {
         @include button;
@@ -23,7 +24,11 @@
         margin-top: 1rem;
         &__link {
             margin-left: 0.25rem;
-            color: blue;
+            color: $link--color;
         }
     }
+}
+
+.error {
+    @include error;
 }
