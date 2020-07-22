@@ -31,7 +31,7 @@ export function userReducer(
         error: "",
       };
     case LOGIN_SUCCESS:
-      document.cookie = 'token' + '=' + action.payload + "; max-age=2592000" + "; path=/";
+      document.cookie = "token =" + action.payload + "; max-age=2592000; path=/";
       return {
         isLogging: false,
         isLogged: true,
@@ -46,7 +46,7 @@ export function userReducer(
         error: "", //return error
       };
     case LOGOUT:
-      document.cookie = 'token' + '= ; max-age=-1';
+      document.cookie = "token= ; max-age=-1";
       return {
         ...state,
         isLogged: false,

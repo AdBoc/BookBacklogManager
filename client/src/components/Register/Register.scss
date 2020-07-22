@@ -4,6 +4,9 @@
 
 .Register {
     @extend .Login;
+    &__mainText {
+        @extend .Login__mainText;
+    }
     &__label {
         @extend .Login__label;
     }

@@ -4,6 +4,7 @@ import { BookStateObject } from '../../../redux/Books/interfaces';
 import { removeBook, downloadBook, uploadBook, removeFile } from '../../../redux/Books/actions';
 import { StoreType } from '../../../ts/interfaces/interfaces';
 import NewBookForm from '../../ReusableComponents/NewBookForm';
+import './BookListElement.scss';
 
 interface IProps {
   book: BookStateObject;
@@ -30,10 +31,6 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
     uploadBook(token, dataForm);
   }
 
-  const closeElement = () => {
-    close(book);
-  };
-
   const handleEditMode = () => {
     setEditMode(prev => !prev)
   }
@@ -43,28 +40,30 @@ const BookListElement: React.FC<IProps> = ({ book, close }) => {
   }
 
   return (
-    <>
+    <div className="BookListElement">
       {editMode ?
         (
           <NewBookForm type='edit' book={book} setDisplayStatus={setEditMode} />
         ) : (
           <>
-            <div>{book.title}</div>
-            <div>{book.author}</div>
-            <div>Pages: {book.pages}</div>
-            <div>Release: {book.year}</div>
-            <div>Type: {book.type}</div>
-            <div>Status: {book.status}</div>
+            <p className="display__close" onClick={() => { close(book) }}></p>
+            <p className="BookListElement__field">{book.title}</p>
+            <p className="BookListElement__field">{book.author}</p>
+            <p className="BookListElement__field">Pages: {book.pages}</p>
+            <p className="BookListElement__field">Release: {book.year}</p>
+            <p className="BookListElement__field">Type: {book.type}</p>
+            <p className="BookListElement__field">Status: {book.status}</p>
           </>
         )
       }
-      <button onClick={download}>download</button>
-      <button onClick={handleEditMode}>edit</button>
-      <button onClick={remove}>remove</button>
-      <button onClick={closeElement}>close</button>
-      <button onClick={deleteFile}>remove File</button>
-      <input type="file" onChange={upload} />
-    </>
+      <div className="BookListElement__buttons">
+        <button className="BookListElement__buttons__button" onClick={download}>Download</button>
+        <button className="BookListElement__buttons__button" onClick={handleEditMode}>Edit</button>
+        <button className="BookListElement__buttons__button" onClick={remove}>Remove</button>
+        <button className="BookListElement__buttons__button" onClick={deleteFile}>Remove File</button>
+        <label className="BookListElement__buttons__button">Upload File<input className="BookListElement__buttons__hidden" type="file" onChange={upload} /></label>
+      </div>
+    </div>
   )
 }
 

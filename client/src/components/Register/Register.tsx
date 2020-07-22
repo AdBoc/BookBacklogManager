@@ -20,7 +20,7 @@ const Register: React.FC = (): JSX.Element => {
 
   return (
     <form className="Register" onSubmit={handleSubmit}>
-      <label className="Register__label">Email address</label>
+      <h1 className="Register__mainText">REGISTER</h1>
       <input
         className="Register__input"
         type="email"
@@ -29,7 +29,6 @@ const Register: React.FC = (): JSX.Element => {
         placeholder="Email"
       />
       {data.formErrors.email && <p className="error">{data.formErrors.email}</p>}
-      <label className="Register__label">Password</label>
       <input
         className={data.formErrors.password ? "Register__input--error" : "Register__input"}
         type="password"
@@ -38,7 +37,6 @@ const Register: React.FC = (): JSX.Element => {
         placeholder="Password"
       />
       {data.formErrors.password && <p className="error">{data.formErrors.password}</p>}
-      <label className="Register__label">Confirm Password</label>
       <input
         className={data.formErrors.confirmPassword ? "Register__input--error" : "Register__input"}
         type="password"

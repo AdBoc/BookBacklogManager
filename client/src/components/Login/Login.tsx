@@ -18,30 +18,28 @@ const Login: React.FC = (): JSX.Element => {
   };
 
   return (
-    <>
-      <form className="Login" onSubmit={handleSubmit}>
-        <label className="Login__label">Email address</label>
-        <input
-          className={"Login__input " + (data.formErrors.email ? "Login__input--error" : "")}
-          type="email"
-          name="email"
-          onChange={handleChange}
-          placeholder="Email"
-        />
-        {data.formErrors.email && <p className="error">{data.formErrors.email}</p>}
-        <label className="Login__label">Password</label>
-        <input
-          className={"Login__input " + (data.formErrors.password ? "Login__input--error" : "")}
-          type="password"
-          name="password"
-          onChange={handleChange}
-          placeholder="Password"
-        />
-        {data.formErrors.password && <p className="error">{data.formErrors.password}</p>}
-        <button className="Login__button" type="submit">Submit</button>
-      </form>
+    <form className="Login" onSubmit={handleSubmit}>
+      <h1 className="Login__mainText">LOGIN</h1>
+      <input
+        className={"Login__input" + (data.formErrors.email ? " Login__input--error" : "")}
+        type="email"
+        name="email"
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      {data.formErrors.email && <p className="error">{data.formErrors.email}</p>}
+      <input
+        className={"Login__input" + (data.formErrors.password ? " Login__input--error" : "")}
+        type="password"
+        name="password"
+        onChange={handleChange}
+        placeholder="Password"
+      />
+      {data.formErrors.password && <p className="error">{data.formErrors.password}</p>}
+      <input className="Login__button" type="submit" value="LOGIN"/>
+      {/* <button className="Login__button" type="submit">Submit</button> */}
       <p className="Login__createAccount">No Account?<Link className="Login__createAccount__link" to="/register">Sign up</Link></p>
-    </>
+    </form>
   )
 }
 

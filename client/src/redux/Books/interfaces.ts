@@ -4,8 +4,8 @@ export interface BookStateObject {
   author: string;
   year: string;
   pages: string;
-  type: string;
-  status: string;
+  type: 'Nonfiction' | 'Fiction' | 'Science' | '';
+  status: 'OnBacklog' | 'CurrentlyReading' | 'Suspended' | 'History' | '';
   dateCreated: string;
   filePath?: string;
   currentReadsStatus: {

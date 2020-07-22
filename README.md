@@ -82,17 +82,20 @@
 
 0.5.3 - app uses cookies to store token with expiration date
 
+0.5.4 - improved css for mobile devices
+
 TO DO:
-1 Way to get out of forms
-2 Media queries for other devices and screens
-3 Full implementation of Redux
-4 Add full Dark Theme support
+1 Media queries for other devices and screens
+2 Full implementation of Redux
+3 Add full Dark Theme support
 - Theme should be stored in storage/cookie
-5 Small fixes and exception handling
-6 Async and aborting requests
-7 Backend validation
-8 Animations
-9 Optimizing
+4 Small fixes and exception handling
+5 Async and aborting requests
+6 Backend validation
+7 Animations
+8 Optimizing
+9 Use custom webpack setup
+10 Upload webpage
 <!-- Add Book rating system -->
 <!-- Remove powinien sprawdzac czy plik istnieje -->
 <!-- After login page must refresh/or useeffect with redux login change -->

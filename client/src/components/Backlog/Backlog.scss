@@ -1,5 +1,5 @@
-@import '../../styles/scss/variables.scss';
-@import '../../styles/scss/mixins.scss';
+@import "../../styles/scss/variables.scss";
+@import "../../styles/scss/mixins.scss";
 
 .BookList {
   text-align: center;
@@ -9,7 +9,7 @@
   &__sortingOptions {
     border: solid 1px $primary--border--color;
     padding: 0.5rem;
-    .select{ 
+    .select {
       display: inline-block;
     }
   }
@@ -18,7 +18,7 @@
     overflow-y: auto;
 
     &__item {
-      padding: .5rem;
+      padding: 0.5rem;
       border-bottom: 1px solid $primary--border--color;
       border-left: 1px solid $primary--border--color;
       border-right: 1px solid $primary--border--color;
@@ -33,6 +33,7 @@
     }
   }
   &__bookAmount {
+    margin-top: 0.2rem;
     font-size: 0.8rem;
     text-align: end;
   }

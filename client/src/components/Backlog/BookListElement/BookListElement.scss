@@ -1,0 +1,28 @@
+@import "../../../styles/scss/mixins.scss";
+@import "../../../styles/scss/variables.scss";
+
+.BookListElement {
+    @include display;
+    padding-top: 4rem;
+    &__field {
+        font-size: 1.5rem;
+        margin: 0.5rem;
+    }
+    &__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        &__button {
+            border: 0px solid $primary--border--color;
+            border-radius: 3px;
+            background-color: $secondary--color;
+            color: $second--font;
+            cursor: pointer;
+            flex: 1 0 40%;
+            margin: 0.4rem 0.75rem;
+            padding: 1rem;
+        }
+        &__hidden {
+            visibility: hidden;
+        }
+    }
+}
