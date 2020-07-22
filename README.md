@@ -80,19 +80,19 @@
 
 0.5.2 - small fixes were made to verification 
 
+0.5.3 - app uses cookies to store token with expiration date
+
 TO DO:
-1 Token should be stored in cookies, improve css
-- Expire after 30 days
-2 Way to get out of forms
-3 Media queries for other devices and screens
-4 Full implementation of Redux
-5 Add full Dark Theme support
+1 Way to get out of forms
+2 Media queries for other devices and screens
+3 Full implementation of Redux
+4 Add full Dark Theme support
 - Theme should be stored in storage/cookie
-6 Small fixes and exception handling
-7 Async and aborting requests
-8 Backend validation
-9 Animations
-10 Optimizing
+5 Small fixes and exception handling
+6 Async and aborting requests
+7 Backend validation
+8 Animations
+9 Optimizing
 <!-- Add Book rating system -->
 <!-- Remove powinien sprawdzac czy plik istnieje -->
 <!-- After login page must refresh/or useeffect with redux login change -->

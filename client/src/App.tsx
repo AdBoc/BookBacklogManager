@@ -10,24 +10,28 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import PrivateRoute from './_helpers/privateRoute';
 
-import './styles/scss/index.scss';
 import Customization from './components/Customization/Customization';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AUTHORIZE } from './redux/User/interfaces';
 import PublicRoute from './_helpers/PublicRoute';
 import { requestBooks } from './redux/Books/actions';
+import './styles/scss/index.scss';
 
 const App: React.FC = (): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+   const token = document.cookie.split('; ').reduce((r, v) => {
+      const parts = v.split('=')
+      return parts[0] === 'token' ? decodeURIComponent(parts[1]) : r
+    }, '');
+    
     if (token) {
-      dispatch({ type: AUTHORIZE, payload: token, status: true })
+      dispatch({ type: AUTHORIZE, payload: token, status: true });
       dispatch(requestBooks(token));
     } else {
-      dispatch({ type: AUTHORIZE, payload: "", status: false })
+      dispatch({ type: AUTHORIZE, payload: "", status: false });
     }
     // eslint-disable-next-line
   }, [])

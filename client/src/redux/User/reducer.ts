@@ -31,7 +31,7 @@ export function userReducer(
         error: "",
       };
     case LOGIN_SUCCESS:
-      localStorage.setItem("token", action.payload); //temporary
+      document.cookie = 'token' + '=' + action.payload + "; max-age=2592000" + "; path=/";
       return {
         isLogging: false,
         isLogged: true,
@@ -46,7 +46,7 @@ export function userReducer(
         error: "", //return error
       };
     case LOGOUT:
-      localStorage.removeItem("token"); //temporary
+      document.cookie = 'token' + '= ; max-age=-1';
       return {
         ...state,
         isLogged: false,
@@ -63,7 +63,7 @@ export function userReducer(
         isLogged: action.status,
         token: action.payload,
         error: "",
-      };
+      }; //if auth
     default:
       return state;
   }
